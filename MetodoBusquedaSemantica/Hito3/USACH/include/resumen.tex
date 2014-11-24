@@ -1,0 +1,94 @@
+\section{Resumen Ejecutivo}
+
+A partir del interés presentado por cinco universidades del país en el
+ámbito de la astronomía, nace la iniciativa de crear un observatorio
+virtual (CHIVO; Chilean virtual obsevatory) contando con el apoyo del
+observatorio ALMA, REUNA e instituciones privadas.
+
+ALMA (Heisig, 2007), constantemente esta generando un gran volumen de
+datos, surge la necesidad entonces de desarrollar nuevas herramientas
+para analizar esta información y algoritmos que sean capaces de
+procesarlos.
+
+Una de estas herramientas, que posee gran utilidad debido a sus
+diversos campos de aplicación, corresponde al registro de imágenes;
+técnica que se adapta dependiendo del área de aplicación y el objetivo
+de estudio, aunque dicha herramienta posee gran complejidad, ha
+presentado mucho interés pues existe una amplia bibliografía de
+diversos autores que la avalan.
+
+El registro de imágenes consiste en ajustar geométricamente un
+conjunto de ellas, a partir de una imagen tomada como referencia, de
+modo que al procesarlas coincidan espacialmente en un plano.
+
+En el caso de imágenes astronómicas, es muy limitada su obtención. Por
+un lado siempre los instrumentos de medición tendrán un margen de
+error que se tiene que considerar, como también, no siempre se contará
+con las mejores condiciones atmosféricas. Adicionalmente la cantidad
+de factores extraterrestres que pueden influir, como por ejemplo, una
+nebulosa obstaculizando el objeto de estudio, conlleva a mejorar las
+técnicas de observación, y el tratamiento de la información generada.
+El registro de imágenes, permite complementar la información existente
+para posteriormente analizarla.
+
+Una aplicación importante dentro del registro de imágenes, es en el
+área de la medicina nuclear. Los avances tecnológicos que involucran
+las imágenes médicas, han permitido pasar de una radiografía
+convencional a una tomografía axial computarizada (CT), resonancia
+magnética nuclear (MRI), resonancia magnética funcional (fMRI),
+tomografía computarizada por emisión de fotón único (SPECT), o la
+tomografía por emisión de positrones (PET). El médico actual se da
+cuenta de las posibilidades que ofrece la combinación de múltiples
+imágenes, pero para llevarlo a cabo y poder compararlas directamente,
+es necesario eliminar las diferencias de tamaño, posicionamiento,
+orientación o incluso la distorsión espacial. Todo este proceso, es el
+que conoceremos como registro de imágenes. A grandes rasgos, el
+registro de imágenes se puede dividir en dos etapas: primero una
+transformación geométrica, con la intención de lograr la mayor
+concordancia entre ellas y segundo un proceso de fusión, que es la
+visualización conjunta de ellas.
+
+Una aplicación del registro de imágenes en medicina, es el seguimiento
+de la evolución de una enfermedad en pacientes epilépticos. Gracias a
+esta técnica se pueden comparar estudios de un mismo paciente en
+diferentes momentos, pudiendo así cuantificar diferencias entre
+estudios ictales e inter-ictales con SPECT, y así localizar mejor el
+foco epiléptico (Lewis, et al., 2000). Este ajuste de imágenes,
+también conocido como proceso de normalización, permite comparar
+resultados entre pacientes, ajustando cada paciente a una plantilla
+común, de esta manera se puede realizar por ejemplo, un análisis
+estadístico sobre como afecta la enfermedad, como evoluciona en
+diferentes pacientes en el tiempo, o la efectividad del tratamiento.
+
+Existen aplicaciones dentro del campo de la cartografía. Al sur de
+Orinoco, en Venezuela, existe un proyecto conocido como CARTOSUR
+(Miguel, 2003), el cual buscó determinar si la fusión de ortoimágenes
+del radar SAR del proyecto CARTOSUR e imágenes Landsat Tematic Mapper,
+permiten lograr un mejor análisis visual de los elementos del
+territorio. La nubosidad propia de la región, impedía en muchos casos
+hacer vuelos fotogramétricos, o que estos lograrán un área de
+cobertura libre de nubes. Ambos tipos de imágenes tuvieron que pasar
+por filtros para poder combinarlas, por ejemplo, las imágenes de radar
+presentan un cierto tipo de ‘ruido’, conocido como moteado, el cual
+produce un efecto en la imagen de granularidad. En el caso de las
+imágenes de Landsat, presentan un desplazamiento en comparación a las
+orto-imágenes de radar (J., 1995), las cuales posteriormente tuvieron
+que ser corregidas. Finalmente se pudo concluir después de varias
+pruebas, que la fusión de estos dos tipos de imágenes ayudó
+definitivamente a identificar elementos de carácter antrópico y por lo
+tanto, apoyar las labores de captura de datos a partir de la
+interpretación de orto-imágenes de radar.
+
+En este sentido el registro de imágenes cuenta con un conjunto de
+información que permite también el estudio a nivel astronómico,
+pudiendo abordar las características y variaciones de los elementos
+con los que se generarán estadísticas y estimaciones en el futuro.
+
+La solución propuesta es desarrollar un módulo en Python (Rogan \&
+Muñoz, 2012), utilizando matrices y transformaciones geométricas en el
+plano que normalicen imágenes en dos dimensiones. Para poder abrir,
+operar y escribir sobre cada archivo, se utilizará el módulo Astropy
+(Astropy) y para operaciones matemáticas generales el módulo math
+(Python). De esta manera realizar un ajuste de ellas en relación a su
+posición, tamaño, rotación y deproyección en un plano de dos
+dimensiones, generando una colección de imágenes a analizar.

@@ -1,0 +1,93 @@
+\section{Conclusiones}
+
+A lo largo de este documento se ha visto como se aplica el registro de
+imágenes a objetos astronómicos y la utilidad junto con el valor que
+genera su uso en investigaciones en diferentes áreas mas allá de las
+ciencias del universo.
+
+Se puede apreciar la importancia que ha tenido el registro en el
+ámbito de la medicina nuclear, ayudando a observar, caracterizar y
+definir alteraciones físicas a nivel cerebral que presentan pacientes,
+permitiendo comparar resultados en el tiempo y así definir que
+tratamiento es el mas adecuado.
+
+También se habla de un proyecto llamado CARTOSUR donde se mezclaron
+imágenes en diferentes longitudes de onda. Aquí se aprecia que si bien
+el registro de imágenes es una técnica que remota desde los inicios de
+la imagen digital, el incursionar en nuevas técnicas, como mezclar
+imágenes de radio con imágenes ópticas, es la prueba de lo amplio y
+extenso que puede ser el uso del registro.
+
+La necesidad existente en poseer mejores herramientas de análisis que
+apoyen la toma de decisiones es lo que motiva la exploración,
+experimentación y desarrollo de técnicas que procesen la información.
+
+Atacama Large Milimetric/Submilimetric Array, actualmente el radio
+telescopio más grande del mundo, genera tanta información, alrededor
+de 750Gb de información por día, que los astrónomos requieren contar
+con una plataforma abierta para acceder virtualmente a todas las
+observaciones realizadas. Esta plataforma virtual nombrada ‘ChiVO’,
+necesita contar con herramientas que procesen de manera inteligente
+los datos capturados, generando información de calidad, útil para los
+astrónomos y comunidad en general. En el caso del registro de
+imágenes, es una herramienta avanzada de mucha utilidad tanto para
+ALMA como otros observatorios, dando un valor agregado a la
+información obtenida. Esto es de vital importancia, ya que el registro
+no es tan solo disminuir el ruido o aumentar la calidad de una imagen,
+sino las variadas posibilidades de análisis que permite realizar, por
+ejemplo: estudiar la composición o estructura de una galaxia en
+particular a partir de la información obtenida en una observación;
+determinar la edad que posee un cúmulo globular; analizar la
+evolución o cambios que ha tenido un cuerpo en el tiempo. En general,
+los algoritmos implementados a lo largo de las etapas del registro de
+imágenes son operaciones sencillas sobre matrices y transformaciones
+geométricas en el plano, por lo que en la bibliografía existente no
+hay mucha variación. El registro básicamente es una aplicación que
+hace corresponder a cada punto $P$ de coordenadas $(x,y)$ del plano,
+otro punto $P’$ de coordenadas $(x’,y’)$ del mismo plano. Si bien la
+distribución de coordenadas en el plano cartesiano no poseen
+exactamente la misma estructura en que se lee una matriz
+computacionalmente, la geometría aplicada varía levemente, solo hay
+que tener presente que lo que habitualmente leemos en un plano
+cartesiano como abscisa y luego ordenada, aquí es al revés, se lee
+como fila columna, y los ángulo formados en los ejes van en sentido
+horario. Asumiendo lo anterior, ya es mas sencillo trabajar con la
+información.
+
+Otro aspecto fundamental en el registro de imágenes, es la forma en
+que completamos la información cuando se realiza una modificación, una
+matriz computacional no posee puntos densos, es decir, al subdividir
+el espacio entre dos coordenadas, no necesariamente existirá otra
+coordenada entera y por otro lado al trasladar la información
+existente, puede que queden puntos sin información. En estos casos la
+interpolación es imprescindible para completar la información
+faltante. Si bien cada autor tiene su forma, la idea base es completar
+a partir de los puntos vecinos el punto que esta ausente, algunos
+ocupan los 4 vecinos mas cercanos, otros 16, pero depende del fin que
+se quiere conseguir. En el caso de los algoritmos implementados en
+este trabajo tienen una mirada distinta. Por un lado, cuando ocurren
+situaciones en que la información cae sobre un punto ‘decimal’, por
+ejemplo (2.4, 3), el sistema decide dejar la información repartida
+entre el punto (2.0, 3) y (3.0, 3). Este esquema es mucho mas
+sencillo, por un lado asegura que todos los puntos quedarán
+uniformemente distribuidos y por otro lado no es invasivo, es un
+trabajo mas sutil. El segundo caso ocurre cuando una imagen es
+ampliada, la cantidad de información vacía intermedia que queda, es
+proporcional a la razón de escala utilizada. Mirar los objetos mas
+cercanos para completar el punto faltante es algo tedioso, ya que
+desde un punto vacío los vecinos no están equidistantes, dada esta
+situación los vecinos colaboran para completar lo que entre ellos
+falta, esto es mucho mas sencillo, ya que desde un punto con
+información a otro punto con información la distancia es la razón. La
+cantidad de vecinos a comunicar son en grupos de cuatro, de los
+cuales, dos de ellos se ocuparán para el conformar el grupo siguiente.
+
+Un aspecto importante dentro del proceso de ajuste, es contar con el
+conjunto extra de funciones que entregan la información necesaria para
+que el ajuste tome valor, es decir, ya no tan solo son herramientas
+que extraen, rotan, escalan, alinean o deproyectan un objeto, sino que
+aportan la información necesaria para determinar en que grado conviene
+rotar, en que punto alinear, que tanto agrandar o achicar, o donde
+desplazar los puntos para que queden deproyectado. Con esto ya se
+marca una diferencia más a una herramienta de registro convencional.
+
