@@ -19,7 +19,7 @@ pdflatex: $(TEXFILES)
 	@rubber --clean $(TEXFILES:.tex=)
 
 clean:
-	@rm -f *.log *.bak *.aux *.bbl *.blg *.idx *.toc *.out *~
+	@rm -f *.log *.bak *.aux *.bbl *.blg *.idx *.toc *.out *.lot *.lof *~
 #	@rubber --clean $(TEXFILES:.tex=)
 
 distclean: clean
