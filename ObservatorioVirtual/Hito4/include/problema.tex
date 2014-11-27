@@ -1,1 +1,87 @@
 \section{Definición del Problema}
+
+El problema abordado para este hito es la puesta en marcha
+del prototipo funcional de ChiVO. Esto implica integrar los
+distintos subsistemas desarrollados para el observatorio
+virtual Chileno en sus versiones básicas. En el Hito 1 
+se detalló el proceso de captura de requerimientos, de 
+los cuales se seleccionaron los siguientes para el 
+desarrollo del prototipo:
+
+\begin{enumerate}
+\item Buscar por coordenadas o región del cielo:
+Se podrán realizar búsquedas de posición mediante coordenadas y radio angular
+(cónicas) o por región del cielo.
+\item Buscar por nombre o tipo de objeto:
+El sistema deberá permitir buscar por nombres de objetos que se encuentren
+definidos en Sesame, del Centre de Donnees astronomiques de Strasbourg (CDS).
+\item Buscar por metadatos espectrales (frecuencia y resolución): 
+Se podrán realizar búsquedas por metadatos espectrales, lo cual consiste en
+búsqueda por banda o rango de frecuencia, búsquedas por líneas espectrales y 
+corrimiento al rojo o búsquedas por resolución espectral.
+\end{enumerate}
+
+De estos requerimientos, se desprenden los siguientes casos 
+de uso aplicables a esta entrega
+(descritos en detalle en la memoria de Walter Fariña~\cite{}):
+\begin{itemize}
+\item CU1: Filtrar los resultados de la búsqueda en el Portal Web.
+\item CU2: Descargar datos desde el Portal Web.
+\item CU8: Ingresar al Portal Web y realizar una búsqueda por coordenadas.
+\item CU9: Realizar una búsqueda de listado de coordenadas
+\item CU10: Buscar por nombre o tipo de objeto.
+\item CU13: Ingresar al Portal Web y realizar una búsqueda espectral
+\end{itemize}
+
+Cabe destacar que el conjunto de requerimientos y casos de usos completo
+corresponde a la funcionalidad final que el observatorio virtual Chileno
+debería ofrecer en un futuro. Por otro lado, los requerimientos y casos de usos seleccionados
+para este prototipo corresponden a los desafíos tecnológicos y funcionalidades
+básicas que todo observatorio virtual debiera ofrecer.
+
+La arquitectura de ChiVO, presentada en hitos anteriores, corresponde
+a un modelo de tres capas siguiendo las recomendaciones de IVOA.
+%includeimage
+
+\begin{itemize}
+\item Capa Datos: modelo de datos, archivos y acceso a bajo nivel 
+a los datos del observatorio virtual. Cada conjunto de datos puede
+tener sus propios servicios de acceso a datos. En este prototipo
+se decidió trabajar con el backend de DACHS.
+\item Capa de Aplicación: web-services con única interfaz para todos
+los servicios que ofrece ChiVO en su conjunto. Este endpoint está programado en
+python+flask, y funciona como multiplexor de servicios. Las aplicaciones
+IVOA compatibles interoperan con este endpoint.
+\item Capa de Usuarios: interfaz gráfica limitada para acceder a los
+a algunos servicios ofrecidos por ChiVO via un portal web. Cara visible
+de ChiVO...
+\end{itemize}
+
+El problema para esta entrega es integrar las capas, y corroborar
+los requerimientos end-to-end con datos reales. Cada caso de uso
+define tareas por cada capa y de integración, los cuales se tabulan a continuación.
+\begin{tabular}{l|l|l|l|l|}
+\textbf{Caso de Uso} & \textbf{Capa Datos} &
+\textbf{Capa de Aplicación} & \textbf{Capa de Usuarios} &
+\textbf{Integración} \\
+CU1 & Ingestar datos FITS de ALMA & Incluir servidores de otros VOs & Filtrar
+datos desde el VOView & Implementar ciclo FITS-VOTable-VOView\\
+CU2 & Desacoplar los binarios en servidor de archivos independiente &
+Redireccionar acceso a servidor de archivos & Habilitar links en VoView &
+Descargar archivos desde portal web de forma transparente\\
+CU8 & Levantar servicios TAP, SCS y SIA & Harvesting de servicios SCS y SIA &
+Implementar vistas definitivas de SCS y SIA & Casos de prueba para datos FITS de
+ALMA \\
+CU9 & & & 
+Implementar peticiones en batchs utilizando CSV & Obtener resultados de queries a partir un
+archivo CSV \\
+CU10 & & Estudiar opciones de resolvedor de nombres para catálogos propios &
+Implementar Javascript que resuelva nombres desde SESAME & Casos de pruebas
+utilizando nombres \\
+CU13 &  & Harvesting de servicios SSA &
+Implementar vistas definitivas de SSA & Casos de prueba para datos espectrales \\
+\end{tabular}
+
+
+
+
