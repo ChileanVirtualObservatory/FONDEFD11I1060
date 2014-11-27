@@ -61,62 +61,41 @@ El problema para esta entrega es integrar las capas, y corroborar
 los requerimientos end-to-end con datos reales. Cada caso de uso
 define tareas por cada capa se tabulan a continuación.
 
-\footnotesize
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\footnotesize
-\textbf{CU} & \textbf{Capa Datos} &
-\textbf{Capa de Aplicación} & \textbf{Capa de Usuarios} \\
-%\textbf{Integración} \\
-\hline
-\hline
-1 & 
-Ingestar datos FITS de ALMA & 
-Incluir servidores de otros VOs & 
-Filtrar datos desde el VOView \\
-%Implementar ciclo FITS-VOTable-VOView\\
-\hline
-2 & 
-Desacoplar los binarios en servidor &
-Redireccionar acceso a servidor de & 
-Habilitar links en VoView \\
-%Descargar archivos desde portal web \\
-&
-de archivos independiente &
-archivos & \\
-%de forma transparente\\
-\hline
-8 & 
-Levantar servicios TAP, SCS y SIA & 
-Harvesting de servicios SCS y SIA &
-Implementar vistas definitivas de \\
-%Casos de prueba para datos FITS  \\
-& & &
-SCS y SIA \\
-%de ALMA \\
-\hline
-9 & & & 
-Implementar peticiones en batchs \\ 
-%Obtener resultados de queries a \\
-& & & 
-utilizando CSV \\
-%partir un archivo CSV \\
-\hline
-10 & & 
-Estudiar opciones de resolvedor de &
-Implementar Javascript que resuelva \\
-%Casos de pruebas utilizando nombres \\
-& &
-nombres para catálogos propios &
-nombres desde SESAME \\
-\hline
-13 & & 
-Harvesting de servicios SSA &
-Implementar vistas definitivas de SSA \\ 
-%Casos de prueba para datos espectrales \\
-\hline
-\end{tabular}
+%\footnotesize
+\begin{table}[ht!]
+    \begin{center}
+	\begin{tabular}{c|p{1.2in}|p{1.4in}|p{1.3in}|p{1.3in}}
+	    %\footnotesize
+	    \textbf{CU} & \textbf{Capa Datos} &
+	    \textbf{Capa de Aplicación} & \textbf{Capa de Usuarios} &
+	    \textbf{Integración} \\\hline\hline
+	    \#1 & 
+	    Ingestar datos FITS de ALMA & Incluir servidores de otros
+	    VOs & Filtrar datos desde el VOView & Implementar ciclo
+	    FITS-VOTable-VOView \\\hline
+	    \#2 & Desacoplar los binarios en servidor de archivos
+	    independiente & Redireccionar acceso a servidor de
+	    archivos & Habilitar links en VoView & Descargar archivos
+	    desde portal web de forma transparente \\\hline
+	    \#8 & Levantar servicios TAP, SCS y SIA & Harvesting de
+	    servicios SCS y SIA & Implementar vistas definitivas de
+	    SCS y SIA & Casos de prueba para datos FITS de ALMA \\\hline
+	    \#9 & & & Implementar peticiones en batchs utilizando CSV &
+	    Obtener resultados de queries a partir un archivo CSV
+	    \\\hline 
+	    \#10 &
+	    Estudiar opciones de resolvedor de nombres para catálogos
+	    propios & Implementar Javascript que resuelva & nombres
+	    desde SESAME & Casos de pruebas utilizando nombres \\\hline
+	    \#13 & & 
+	    Harvesting de servicios SSA & Implementar vistas
+	    definitivas de SSA & Casos de prueba para datos
+	    espectrales \\
+	\end{tabular}
+    \end{center}
+    \caption{Tareas asociadas a cada caso de uso.}
+\end{table}
 
-\normalsize
+%\normalsize
 
 
