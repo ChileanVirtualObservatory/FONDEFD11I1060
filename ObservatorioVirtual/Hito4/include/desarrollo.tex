@@ -48,8 +48,20 @@ de datos de IVOA. Al final, los investigadores astrónomos del equipo
 de trabajo recomendaron obviar dichos campos por el momento, ya que
 los nuevos FITS de ALMA en ciclos superiores si debieran incluir esos campos.
 
-Otro problema importante fue recopilar los archivos FITS en si, 
-ya que...
+Otro problema importante fue recopilar los archivos FITS en si.
+Para ciclo 0, estos datos se distribuyen dentro de archivos tipo
+"archive" (i.e. .tar) de gran tamaño, que incluyen varios MS y 
+varios FITS. El localizar, transportar y procesar estos grandes archivos
+no es simple, por lo que se realizó un script de identificación de FITS
+relevantes junto a un ingeniero de ALMA, y se transportaron físicamente
+a los servidores del prototipo de ChiVO (34 fits). Paralelamente,
+se ha desarrolló un protocolo simple y scripts para la recolección 
+(harvesting) de FITS directamente desde la interfaz pública de datos.
+A la fecha, solo se han recopilado unos pocos fits, pero el objetivo
+es tener todos los fits de ciclo 0 (y algunos de ciclo 1) en el prototipo
+de ChiVO al final del proyecto.
+
+
 
 \subsection{Avance en End-point}
 
