@@ -1,1 +1,45 @@
 \section{Resumen Ejecutivo}
+
+En el marco de esta segunda etapa de implementación del Obvervatorio
+Virtual Chileno (ChiVO, \emph{Chilean Virtual Observatory}), se ha
+desarrollado un prototipo funcional, en base a los requerimientos
+definidos en el Hito 1 y que han sido seleccionados para esta entrega.
+Los requerimientos son:
+
+\begin{itemize}
+  \item Buscar por coordenadas o región del cielo.
+  \item Buscar por nombre o tipo de objeto.
+  \item Buscar por metadatos espectrales.
+\end{itemize}
+
+En base a estos requerimientos se ha trabajado fundamentalmente en dos
+aspectos: la capa de datos y las vistas del observatorio virtual.
+
+En relación a la capa de datos, se ha trabajado en la ingesta de datos
+(\emph{data ingestion}) de ALMA, utilizando los formatos ASDM y FITS,
+para lo cual previamente se ha debido estudiar el complejo modelo de
+datos de ALMA, debiendo hacer un mapeo desde éste al modelo de base de
+datos propuesto por IVOA. Importante es destacar que los archivos ASDM
+con los cuales se trabajó era de prueba, ya que los que posee ALMA no
+son públicos, por lo que no estarán presentes dentro del prototipo
+final. Algo similar se ha realizado con los datos FITS generados por
+ALMA, cuya metadata se debió mapear hacia el modelo de datos propuesto
+por IVOA. Finalmente, se ha debido trabajar con los archivos FITS para
+poder incorporarlos a ChiVO y estudiar un mecanismo automatizado para
+adquirir estos datos desde ALMA.
+
+\textbf{Endpoint}
+
+En lo que respecta a la parte visual de ChiVO, se ha implmentado las
+vistas para las búsquedas \emph{Simple Cone Search}, \emph{Simple
+  Image Access} y \emph{Simple Spectral Access}. Cada una de estas
+búsquedas pueden ser encontradas en el sitio \url{beta.chivo.cl},
+donde se encuentra el protipo funcional de la herramienta. En el menú
+superior hay una pestaña llamada \emph{services}, desde la cual se
+puede llegar a las 3 búsquedas. Cada una de ellas posee a su vez, 3
+pestañas de características similares: la primera corresponde a un
+formulario donde se debe ingresar los datos de la búsqueda; la segunda
+despliega información respecto a lo ingresado en la primera,
+específicamente, la lista de fuentes que contienen la información
+solicitada; y la tercera despliega los resultados según las fuentes
+seleccionadas en la pestaña anterior.
