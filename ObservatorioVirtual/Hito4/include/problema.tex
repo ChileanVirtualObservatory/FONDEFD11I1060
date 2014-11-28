@@ -59,7 +59,8 @@ de ChiVO para usuarios inexpertos.
 
 El problema para esta entrega es integrar las capas, y corroborar
 los requerimientos end-to-end con datos reales. Cada caso de uso
-define tareas por cada capa se tabulan a continuación.
+define tareas por cada capa y de integración, las cuales se tabulan 
+a continuación.
 
 %\footnotesize
 \begin{table}[ht!]
@@ -70,7 +71,7 @@ define tareas por cada capa se tabulan a continuación.
 	    \textbf{Capa de Aplicación} & \textbf{Capa de Usuarios} &
 	    \textbf{Integración} \\\hline\hline
 	    \#1 & 
-	    Ingestar datos FITS de ALMA & Incluir servidores de otros
+	    Ingesta de datos FITS de ALMA & Incluir servidores de otros
 	    VOs & Filtrar datos desde el VOView & Implementar ciclo
 	    FITS-VOTable-VOView \\\hline
 	    \#2 & Desacoplar los binarios en servidor de archivos
@@ -95,6 +96,9 @@ define tareas por cada capa se tabulan a continuación.
     \end{center}
     \caption{Tareas asociadas a cada caso de uso.}
 \end{table}
+
+Los detalles de la ejecución de estas tareas se describen en la siguiente
+sección.
 
 %\normalsize
 

@@ -1,6 +1,55 @@
 \section{Desarrollo de la solución}
 
+En la presente sección indicaremos los avances realizados por cada
+capa desde el hito anterior, y describiremos brevemente las tareas
+de integración realizadas.
+
 \subsection{Avance en Backend}
+
+Luego de instalar, configurar y testear exitosamente DACHS (de GAVO),
+en sus servicios básicos de SCS, SIA y TAP, se comenzó con la ingesta
+de datos de ALMA.
+
+De los 3 formatos utilizados por ALMA (ASDM, MS y FITS) se seleccionaron
+el primero y el último. El formato measurement set (MS) corresponde 
+al formato de trabajo del paquete CASA, y no a un formato ideal para la 
+adquisición, almacenamiento o transporte de datos astronómicos.
+
+Para la ingesta de estos datos se requirió:
+\begin{enumerate}
+\item Estudiar el complejo modelo de datos de ALMA (ASDM)
+\item Realizar un mapping de la metadata de los ASDM a el modelo de datos base
+de IVOA (ObsCore DM)
+\item Estudiar la naturaleza de los datos FITS generados por ALMA
+\item Realizar un mapping de la metadata de los FITS a el modelo de datos base
+de IVOA (ObsCore DM)
+\item Crear el modelo de ingesta de FITS en DACHS
+\item Seleccionar, recuperar e incorporar un conjunto de FITS alma para ChiVO
+\item Buscar un mecanísmo de adquicición automática de FITS desde ALMA
+\end{enumerate}
+
+Para los dos primeros puntos de la lista anterior, se trabajó con archivos
+ASDM de ejemplo, ya que el ciclo 0 de ALMA no provée publicamente aquellos
+datos. 
+Estos archivos si 
+se proveeran para los siguientes ciclos, por lo que
+la investigación tecnológica realizada será de gran importancia en el
+futuro cercano.  
+Detalles de este trabajo se informaron en el Hito 3. 
+Sin embargo, para el desarrollo de este proyecto, no se
+tendrá un conjunto de datos ASDM disponible a traves de ChiVO.
+
+Consecuentemente, se trabajó con los archivos FITS, que corresponden
+a los productos finales del pipeline de ALMA. 
+Desafortunadamente, el mapping de la metadata FITS a ObsCore DM no
+puede hacerse uno a uno, y se exploró la posibilidad de combinar
+el contenido de ASDMs con los FITS para completar el modelo
+de datos de IVOA. Al final, los investigadores astrónomos del equipo
+de trabajo recomendaron obviar dichos campos por el momento, ya que
+los nuevos FITS de ALMA en ciclos superiores si debieran incluir esos campos.
+
+Otro problema importante fue recopilar los archivos FITS en si, 
+ya que...
 
 \subsection{Avance en End-point}
 
