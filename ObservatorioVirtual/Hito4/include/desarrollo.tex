@@ -195,8 +195,8 @@ una de las pestañas en esta búsqueda.
 	nombres. Los objetos astronómicos poseen en su mayoría un
 	nombre común de fácil aprendizaje, el cual puede ser ingresado
 	en este campo y automáticamente el sistema completará los
-	datos de RA \& DEC. Actualmente se utiliza el Sesame de
-	{\ldots}, pero se trabaja en la construcción de uno propio.
+	datos de RA \& DEC. Actualmente se utiliza Sesame, pero se
+	trabaja en la construcción de un propio resolvedor de nombres.
       \item [Right Ascension:] es la distancia angular medida hacia el
 	este a lo largo del ecuador celeste desde el equinoccio de
 	primavera al círculo horario del punto en cuestión. La unidad
@@ -275,8 +275,8 @@ una de las pestañas en esta búsqueda.
 	nombres. Los objetos astronómicos poseen en su mayoría un
 	nombre común de fácil aprendizaje, el cual puede ser ingresado
 	en este campo y automáticamente el sistema completará los
-	datos de RA \& DEC. Actualmente se utiliza el Sesame de
-	{\ldots}, pero se trabaja en la construcción de uno propio.
+	datos de RA \& DEC. Actualmente se utiliza Sesame, pero se
+	trabaja en la construcción de un propio resolvedor de nombres.
       \item [RA:] \emph{Right Ascension} es la distancia angular
 	medida hacia el este a lo largo del ecuador celeste desde el
 	equinoccio de primavera al círculo horario del punto en
@@ -298,7 +298,11 @@ una de las pestañas en esta búsqueda.
       \item [Proj:]
       \item [Data Type:]
       \item [Verbosity:]
-      \item [Import CSV File:]
+      \item [Import CSV File:] funcionalidad que permite ingresar un
+	archivo de formato .csv\footnotemark{} con múltiples
+	consultas, las cuales pueden ser agregadas de una sóla vez
+	mediante este archivo, evitando un ingreso una a una mediante
+	el formulario.
     \end{description}  
   \item [Query List:] una vez ingresada la consulta en la pestaña
     anterior (\emph{Query Form}), luego de presionar el botón
@@ -320,6 +324,8 @@ una de las pestañas en esta búsqueda.
     recomendado por IVOA, \emph{VOTable}.
 \end{description}
 
+\footnotetext{\emph{Comma-separated values}, o valores separados por
+  coma.}
 
 \subsubsection{Simple Spectral Access}
 
@@ -367,8 +373,8 @@ una de las pestañas en esta búsqueda.
 	nombres. Los objetos astronómicos poseen en su mayoría un
 	nombre común de fácil aprendizaje, el cual puede ser ingresado
 	en este campo y automáticamente el sistema completará los
-	datos de RA \& DEC. Actualmente se utiliza el Sesame de
-	{\ldots}, pero se trabaja en la construcción de uno propio.
+	datos de RA \& DEC. Actualmente se utiliza Sesame, pero se
+	trabaja en la construcción de un propio resolvedor de nombres.
       \item [Right Ascension:] ascensión recta es la distancia angular
 	medida hacia el este a lo largo del ecuador celeste desde el
 	equinoccio de primavera al círculo horario del punto en
@@ -418,10 +424,10 @@ búsquedas con un ejemplo en base a casos de prueba reales.
 Para este ejemplo se utilizará los siguientes datos:
 
 \begin{description}
-  \item [Source name (Sesame):] .
-  \item [RA:] .
-  \item [DEC:] .
-  \item [Size:] .
+  \item [Source name (Sesame):] aries.
+  \item [RA:] 048.41236467724.
+  \item [DEC:] +32.24365854038.
+  \item [Size:] 20.
 \end{description}
 
 Cabe recordar que al ingresar el campo Sesame, no es necesario
@@ -434,8 +440,8 @@ resultados. Para ello, de la lista de fuentes en la columna
 \emph{Sources}, se seleccionará las siguientes:
 
 \begin{itemize}
-  \item .
-  \item .
+  \item Dickey and Lockman HI map.
+  \item Bonn 1420 MHz Survey.
 \end{itemize}
 
 Luego de seleccionar estas dos fuentes, se debe presionar el botón
@@ -457,9 +463,9 @@ resultados por fuentes siempre estará disponible en la barra lateral
 izquierda, por lo que una vez seleccionada una fuente para ver los
 resultados, se puede seleecionar otra para ver otros resultados.
 Además, se puede seleccionar desde 1 hasta todas las fuentes
-disponibles. En este caso, se ha seleccionado la fuente \emph{fuente},
-la cual despliega un total de 4877 resultados, como se muestra en la
-Fig.~\ref{img:qrscsvot}.
+disponibles. En este caso, se ha seleccionado la fuente \emph{Dickey
+and Lockman HI map}, la cual despliega un total de 2 resultados,
+como se muestra en la Fig.~\ref{img:qrscsvot}.
 
 \begin{figure}[ht!]
     \begin{center}
