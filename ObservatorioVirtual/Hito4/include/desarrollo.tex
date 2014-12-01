@@ -54,16 +54,56 @@ Para ciclo 0, estos datos se distribuyen dentro de archivos tipo
 varios FITS. El localizar, transportar y procesar estos grandes archivos
 no es simple, por lo que se realizó un script de identificación de FITS
 relevantes junto a un ingeniero de ALMA, y se transportaron físicamente
-a los servidores del prototipo de ChiVO (34 fits). Paralelamente,
+a los servidores del prototipo de ChiVO (34 FITS). Paralelamente,
 se ha desarrolló un protocolo simple y scripts para la recolección 
 (harvesting) de FITS directamente desde la interfaz pública de datos.
-A la fecha, solo se han recopilado unos pocos fits, pero el objetivo
-es tener todos los fits de ciclo 0 (y algunos de ciclo 1) en el prototipo
-de ChiVO al final del proyecto.
+A la fecha, solo se han recopilado unos pocos FITS, pero el objetivo
+es tener todos los FITS de ciclo 0 (y algunos de ciclo 1) en el prototipo
+de ChiVO al final del proyecto. Los casos de prueba que se describen en el apartado 
+de integración de esta sección, fueron propuestos por el equipo de backend
+debido su experticia con los datos FITS.
 
-
+Dentro de las funcionalidades fuera de requerimientos de esta capa,
+se han investigado las opciones para implementar un servicio de registro
+de publicación servicios bajo los estandares IVOA. En un principio se estudió 
+VORegistryInABox de el Observatorio Virtual Estadounidense, debido a su
+supuesta simplicidad. Desafortunadamente, el financiamiento para dicha
+iniciativa ha finalizado, y su escasa documentación e incertidumbre para
+su mantención nos llevó a descartar finalmente su utilización.
+En la actualidad se está trabajando en implementar el servicio de
+registros utilizando DACHS, es decir, bajo la misma plataforma
+que el resto de servicios de ChiVO.
 
 \subsection{Avance en End-point}
+
+La principal funcionalidad implementada en end-point correspondió 
+a consultar los registros search de VO-Paris para incorporar
+varias fuentes en una búsqueda tipo SCS, SIA y SSA. Obviamente,
+estas búsquedas también integran los servicios ofrecidos por el backend
+de ChiVO.
+
+El end-point es el responsable actualmente de consultar por la lista
+de posibles recursos para una búsqueda, y retornar los respectivos VOTables
+o JSONs para una búsqueda transparente. Gracias a la especificación estándar
+de IVOA, el procedimiento puede ser llevado a cabo automático con cualquier
+recurso IVOA-complient. Como se indicó en hitos anteriores, el end-point
+está desarrollado en Python + Flask.
+
+El end-point fue validado independiente del portal web,
+accediendo de forma directa a los servicios ocupando la
+herramienta TOPCAT (que permite el acceso a servicios TAP 
+mediante una GUI), desarrollado principalmente por Mark Taylor
+de la Universidad de Bristol. En principio, no se observa
+ninguna inconsistencia ni problemas de acceso.
+
+Además, el equipo de end-point estudió la posibilidad
+de crear un servicio de catálogos (como SESAME) para ALMA y para 
+los resultados de los algoritmos de procesamiento
+desarrollados en este proyecto. Se exploró la idea
+de utilizar bases de datos NO-SQL, y si bien estos 
+modelos incorporan una semántica más cercana al problema, 
+el rendimiento de bases de datos SQL como postgresql aún
+supera con creces a las alternativas NO-SQL.
 
 \subsection{Avance en Frontend}
 
