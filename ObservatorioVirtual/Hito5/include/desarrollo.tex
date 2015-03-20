@@ -1,6 +1,47 @@
 \section{Desarrollo de la solución}
 
+Como se ha mencionado en las secciones anteriores, este hito comprende el desarrollo de dos grandes secciones. La primera está relacionada con el despliegue de la aplicación, de tal manera de contar con una arquitectura moderna, escalable, segura y por sobre los estándares mínimos requeridos para la producción de software. El segundo tiene relación con una adecuada documentación en línea que permita una completa utilización de ChiVO, tanto bajo su interfaz web como su uso mediante otras herramientas.
+
+Para realizar un exitoso despliegue se requiere de una infraestructura de acuerdo a las necesidades requeridas. Esto puede parecer una obviedad, pero es importante destacarlo pues no existe una fórmula única para determinar la arquitectura a utilizar. Dado esto, se realizó un completo estudio de las alternativas existentes y que estuvieran al alcance de este proyecto, para luego tomar las decisiones de qu\'e opciones tomar e implementarlas. La descripción de esto se encuentra en el Anexo \ref{anx:virtualizacion}. Además, en la sección de anexos se encuentra la descripción de cómo instalar: DaCHS (Anexo \ref{anx:dachs}), herramienta fundamental del \emph{backend}; \texttt{python-flask} (Anexo \ref{anx:flask}), mini \emph{framework} en el que fue desarrollado el \emph{endpoint}; y Ruby on Rails (Anexo \ref{anx:ror}), \emph{framework} en el que fue desarrollado el \emph{frontend}.
+
+A continuación se detalla cada una de estas secciones y las actividades que conllevan.
+
 \subsection{Despliegue}
 
-\subsection{Documentación}
+La implementación o despliegue de un software corresponde a un conjunto de actividades cuyo objetivo final es hacer que el sistema de software quede listo para ser usado. Si bien existen definciones estandarizadas de cómo realizar un despliegue de softare tales como CMM \cite{cmm}, ITIL \cite{itil} y SEWBOK \cite{swebok}, las cuales proveen de directrices generales, sus descripciones son a menudo muy generales y omiten las ideas desarrolladas a partir de los retos y soluciones experimentadas por profesionales del área. Por lo mismo, se presenta en este informe una clasificación descriptiva de las diferentes actividades inmersas dentro del despliegue de software \cite{deployActivities}:
+
+\begin{description}
+	\item [Comunicación con los interesados (stakeholders)] La transferencia de conocimiento sobre el producto de software, su despliegue, y cambios en la funcionalidad interna son críticos para un despliegue exitoso. A continuación se describe las actividades que han permitido el despliegue de ChiVO sin mayores inconvenientes:
+		\begin{description}
+			\item [Informar a los interesados de los contenidos del despliegue] La meta de esta actividad es mantener a los interesados en el proyecto informados sobre el despliegue. Esto es de suma importancia, pues a pesar que el proyecto se encuentra aún en fases de desarrollo, se encuentra una versión beta\footnotemark{} disponible en \url{http://beta.chivo.cl/}, la cual es accesada por todos los interesados del proyecto, e incluso promocionada. Por lo mismo ha sido importante señalar que su funcionamiento puede verse afectado por mejoras implementadas, y más aún, cuando se está en una fase de despliegue. En esta fase el sistema muchas veces no estará disponible en la dirección antes mencionada, por lo que se ha informado tanto a los equipos de desarrollo, como a investigadores, profesores y director del proyecto, lo que se está realizando y el por qu\'e.
+
+				\footnotetext{Corresponde a una fase del desarrollo de software que representa una primera versión del producto, que por lo general se presenta como software inestable y que sirve para realizar pruebas con el sistema operando.}
+			\item [Entrenamiento de los usuarios] El Observatorio Virtual es una herramienta orientada fundamentalmente a la comunidad astronómica, pero tambi\'en a la comunidad en general. Por lo mismo es bastante complicado acotar el número de usuarios, e incluso identificarlos, como para entregar una capacitación personalizada. Por ello es que se ha trabajado en una documentación en línea que permita a cualquier usuario utilizar el sistema, en sus diferentes modalidades. Esto se explica con mayor detalle en la sección \S\ref{sec:doc}.
+			\item [Soporte para los usuarios] De manera similar al punto anterior, se dificulta realizar esta actividad de manera personalizada, por lo que se habilita un correo electrónico\footnotemark{} para recibir las consultas, sugerencias y comentarios del sistema, y así poder tener un canal de comunicación con los usuarios con el objetivo de dar mejoras al sistema en pos de una mayor satisfacción de quienes utilicen el sistema.
+				\footnotetext{\url{mailto:info@chivo.cl}.}
+		\end{description}
+	\item [Preparaciones para la instalación] Antes que la herramienta sea instalada, se debe procurar que todo est\'e dispuesto y de manera correcta para que la instalación sea una proceso lo más limpio posible.
+		\begin{description}
+			\item [Importanción inicial de los datos iniciales del cliente] Uno de las primeras actividades antes de la instalación, es la carga de datos provistos, en nuestro caso, por el mandante, ALMA. Durante largos meses se ha estado en contacto con
+			\item Configuración del producto.
+			\item Integración del producto.
+			\item Planificación de una fecha para el despliegue.
+			\item Crear un paquete de despliegue.
+		\end{description}
+	\item Instalación.
+		\begin{itemize}
+			\item Comprobación previa a la instalación.
+			\item Hacer posible un \emph{rollback}.
+			\item Instalación del producto.
+			\item Transferir el producto desde una ambiente de pruebas a uno de producción.
+			\item Mantenimiento de la información sobre el producto desplegado.
+		\end{itemize}
+	\item Pruebas al producto instalado.
+		\begin{itemize}
+			\item Pruebas por parte de los desarrolladores.
+			\item Pruebas por parte de los usuarios.
+		\end{itemize}
+\end{description}
+
+\subsection{Documentación}\label{sec:doc}
 
