@@ -1,0 +1,151 @@
+\section{\texttt{python-flask}}\label{anx:flask}
+
+Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{Jinja 2} y buenas intenciones. Además, está licenciado bajo 3 cláusulas de la licencia BSD \cite{flask}.
+
+\paragraph{Requerimientos}
+
+\subparagraph{Python}
+
+\begin{itemize}
+	\item Python $>=$ 2.7.
+	\item Python Flask\footnote{\url{http://flask.pocoo.org/}}.
+	\item Python requests\footnote{\url{http://docs.python-requests.org/en/latest/}}.
+	\item Python urllib.
+	\item Python urllib2.
+	\item Python json.
+\end{itemize}
+
+\subparagraph{Despliegue}
+
+\begin{itemize}
+	\item Apache web Server\footnote{\url{http://httpd.apache.org/}}.
+	\item \verb;wsgi_mod;\footnote{\url{http://flask.pocoo.org/docs/0.10/deploying/mod\_wsgi/}}.
+\end{itemize}
+
+\paragraph{Desarrollo y pruebas}
+
+\begin{itemize}
+	\item Clonar repositorio:
+		\begin{verbatim}
+		git clone git@github.com:ChileanVirtualObservatory/flask_endpoint.git
+	\end{verbatim}
+	\item Abrir un terminal y ejecutar \verb;endpoint.py;:
+		\begin{verbatim}
+		python endpoint.py
+	\end{verbatim}
+	\item El servidor web estará corriendo en \verb;localhost:5000;.
+\end{itemize}
+
+\paragraph{Despliegue}
+
+\begin{itemize}
+	\item Clonar repositorio:
+		\begin{verbatim}
+		git clone git@github.com:ChileanVirtualObservatory/flask_endpoint.git
+	\end{verbatim}
+	\item Editar \verb;endpoint.wsgi; con la siguiente ruta:
+		\begin{verbatim}
+		sys.path.insert(0,``/var/www/flask_endpoint'')
+	\end{verbatim}
+	\item Configurar Apache\footnote{\url{http://flask.pocoo.org/docs/0.10/deploying/mod\_wsgi/\#configuring-apache}}.
+\end{itemize}
+
+\paragraph{Servicios}
+
+\subparagraph{Lista de todos los catálogos}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+\end{itemize}
+
+\subparagraph{\emph{Table Access Protocol}}
+
+\begin{itemize}
+	\item Parámetros: \S\ref{anx:dachsparam}.
+\end{itemize}
+
+\subparagraph{Capacidades de servicio}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+\end{itemize}
+
+\subparagraph{Consulta sincrónica}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;POST;.
+	\item Retorno: \verb;VOTABLE;.
+\end{itemize}
+
+\subparagraph{Consulta asincrónica}
+
+\begin{itemize}
+	\item Nueva consulta:
+		\begin{itemize}
+			\item WEB: \url{}.
+			\item M\'etodo: \verb;POST;.
+			\item Retorno: \verb;VOTABLE; con un \verb;id; de la consulta.
+		\end{itemize}
+	\item Lista de consultas:
+		\begin{itemize}
+			\item WEB: \url{}.
+			\item M\'etodo: \verb;GET;.
+			\item Parámetros: no hay.
+			\item Retorno: \verb;UWL;, un archivo \verb;xml; con todas las consultas y sus estados.
+		\end{itemize}
+	\item Información de la consulta:
+		\begin{itemize}
+			\item WEB: \url{}.
+			\item M\'etodo: \verb;GET;.
+			\item Parmátros: no hay.
+			\item Retorno: \verb;UWL; con es estado de la consulta.
+		\end{itemize}
+	\item Otras opciones:
+		\begin{itemize}
+			\item WEB: \url{}.
+			\item M\'etodo: \verb;GET;.
+			\item Parámetros: \verb;option phase;, \verb;quote;, \verb;executionduration;, \verb;destruction;, \verb;error;, \verb;parameters;, \verb;results;, \verb;owner;.
+		\end{itemize}
+\end{itemize}
+
+\subparagraph{Simple Cone Search}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+	\item Atributos: 
+		\begin{itemize}
+			\item RA: grado decimal.
+			\item DEC: grado decimal.
+			\item SR: arco minuto.
+		\end{itemize}
+\end{itemize}
+
+\subparagraph{Simple Image Access}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+	\item Atributos: 
+		\begin{itemize}
+			\item POS: grado decimal.
+			\item SIZE: grado decimal.
+		\end{itemize}
+	\item Atributos opcionales:
+		\begin{itemize}
+			\item INTERSECT: \verb;COVERS;, \verb;ENCLOSED;, \verb;CENTER;, \verb;OVERLAPS;.
+			\item NAXIS: \verb;pixels;.
+			\item CFRAME: \verb;ICRS;, \verb;FK5;, \verb;FK4;, \verb;ECL;, \verb;GAL;, \verb;SGAL;.
+			\item EQUINOX.
+			\item CRPIX.
+			\item CRVAL.
+			\item CDELT.
+			\item ROTANG: grados decimales.
+			\item PROJ: \verb;TAN;, \verb;SIN;, \verb;ARC;.
+			\item FORMAT: \verb;image/fits;, \verb;image/png;, \verb;image/jpeg;, \verb;text/html;, \verb;ALL;, \verb;GRAPHIC;, \verb;GRAPHIC-<SOMETHING>;, \verb;METADATA;.
+			\item VERB: 1, 2, 3.
+		\end{itemize}
+\end{itemize}
