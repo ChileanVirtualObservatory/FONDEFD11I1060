@@ -2,9 +2,9 @@
 
 Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{Jinja 2} y buenas intenciones. Además, está licenciado bajo 3 cláusulas de la licencia BSD \cite{flask}.
 
-\paragraph{Requerimientos}
+\subsection*{Requerimientos}
 
-\subparagraph{Python}
+\subsubsection*{Python}
 
 \begin{itemize}
 	\item Python $>=$ 2.7.
@@ -15,14 +15,14 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 	\item Python json.
 \end{itemize}
 
-\subparagraph{Despliegue}
+\subsubsection*{Despliegue}
 
 \begin{itemize}
 	\item Apache web Server\footnote{\url{http://httpd.apache.org/}}.
 	\item \verb;wsgi_mod;\footnote{\url{http://flask.pocoo.org/docs/0.10/deploying/mod\_wsgi/}}.
 \end{itemize}
 
-\paragraph{Desarrollo y pruebas}
+\subsection*{Desarrollo y pruebas}
 
 \begin{itemize}
 	\item Clonar repositorio:
@@ -36,7 +36,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 	\item El servidor web estará corriendo en \verb;localhost:5000;.
 \end{itemize}
 
-\paragraph{Despliegue}
+\subsection*{Despliegue}
 
 \begin{itemize}
 	\item Clonar repositorio:
@@ -50,29 +50,22 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 	\item Configurar Apache\footnote{\url{http://flask.pocoo.org/docs/0.10/deploying/mod\_wsgi/\#configuring-apache}}.
 \end{itemize}
 
-\paragraph{Servicios}
+\subsection*{Servicios}
 
-\subparagraph{Lista de todos los catálogos}
+\subsubsection*{{\sc Table Access Protocol}}
+
+\begin{itemize}
+	\item Parámetros: Anexo \S\ref{anx:dachsparam}.
+\end{itemize}
+
+\paragraph{Capacidades de servicio}
 
 \begin{itemize}
 	\item WEB: \url{}.
 	\item M\'etodo: \verb;GET;.
 \end{itemize}
 
-\subparagraph{\emph{Table Access Protocol}}
-
-\begin{itemize}
-	\item Parámetros: \S\ref{anx:dachsparam}.
-\end{itemize}
-
-\subparagraph{Capacidades de servicio}
-
-\begin{itemize}
-	\item WEB: \url{}.
-	\item M\'etodo: \verb;GET;.
-\end{itemize}
-
-\subparagraph{Consulta sincrónica}
+\paragraph{Consulta sincrónica}
 
 \begin{itemize}
 	\item WEB: \url{}.
@@ -80,38 +73,43 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 	\item Retorno: \verb;VOTABLE;.
 \end{itemize}
 
-\subparagraph{Consulta asincrónica}
+\paragraph{Consulta asincrónica}
+
+\subparagraph{Nueva consulta}
 
 \begin{itemize}
-	\item Nueva consulta:
-		\begin{itemize}
-			\item WEB: \url{}.
-			\item M\'etodo: \verb;POST;.
-			\item Retorno: \verb;VOTABLE; con un \verb;id; de la consulta.
-		\end{itemize}
-	\item Lista de consultas:
-		\begin{itemize}
-			\item WEB: \url{}.
-			\item M\'etodo: \verb;GET;.
-			\item Parámetros: no hay.
-			\item Retorno: \verb;UWL;, un archivo \verb;xml; con todas las consultas y sus estados.
-		\end{itemize}
-	\item Información de la consulta:
-		\begin{itemize}
-			\item WEB: \url{}.
-			\item M\'etodo: \verb;GET;.
-			\item Parámetros: no hay.
-			\item Retorno: \verb;UWL; con es estado de la consulta.
-		\end{itemize}
-	\item Otras opciones:
-		\begin{itemize}
-			\item WEB: \url{}.
-			\item M\'etodo: \verb;GET;.
-			\item Parámetros: \verb;option phase;, \verb;quote;, \verb;executionduration;, \verb;destruction;, \verb;error;, \verb;parameters;, \verb;results;, \verb;owner;.
-		\end{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;POST;.
+	\item Retorno: \verb;VOTABLE; con un \verb;id; de la consulta.
 \end{itemize}
 
-\subparagraph{Simple Cone Search}
+\subparagraph{Lista de consultas}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+	\item Parámetros: no hay.
+	\item Retorno: \verb;UWL;, un archivo \verb;xml; con todas las consultas y sus estados.
+\end{itemize}
+
+\subparagraph{Información de la consulta}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+	\item Parámetros: no hay.
+	\item Retorno: \verb;UWL; con es estado de la consulta.
+\end{itemize}
+
+\subparagraph{Otras opciones}
+
+\begin{itemize}
+	\item WEB: \url{}.
+	\item M\'etodo: \verb;GET;.
+	\item Parámetros: \verb;option phase;, \verb;quote;, \verb;executionduration;, \verb;destruction;, \verb;error;, \verb;parameters;, \verb;results;, \verb;owner;.
+\end{itemize}
+
+\subsubsection*{{\sc Simple Cone Search}}
 
 \begin{itemize}
 	\item WEB: \url{}.
@@ -124,7 +122,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 		\end{itemize}
 \end{itemize}
 
-\subparagraph{Simple Image Access}
+\subsubsection*{{\sc Simple Image Access}}
 
 \begin{itemize}
 	\item WEB: \url{}.
@@ -150,13 +148,15 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 		\end{itemize}
 \end{itemize}
 
-\subparagraph{External} 
+\subsubsection*{{\sc External}} 
+
+\paragraph{Obtener servicios JSON externos}
 
 \begin{itemize}
-	\item {\bf Obtener servicios JSON externos.} Para obtener un servicio específico (no todos los datos, sólo \verb;shortname;, \verb;title; y \verb;accessURL;: \url{}. Servicio puede ser \verb;tap;, \verb;scs;, \verb;sia; y \verb;ssa;.
+	\item Para obtener un servicio específico (no todos los datos, sólo \verb;shortname;, \verb;title; y \verb;accessURL;: \url{}. Servicio puede ser \verb;tap;, \verb;scs;, \verb;sia; y \verb;ssa;.
 \end{itemize}
 
-\subparagraph{\emph{Harvesting Interface}}
+\subsubsection*{\emph{Harvesting Interface}}
 
 \begin{itemize}
 	\item Registry harvesting interface: \url{}.
