@@ -55,7 +55,15 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subsubsection*{{\sc Table Access Protocol}}
 
 \begin{itemize}
-	\item Parámetros: Anexo \S\ref{anx:dachsparam}.
+	\item Parámetros:
+		\begin{itemize}
+			\item REQUEST: \verb;doQuery;, \verb;getCapabilities; (sólo en asincrónico).
+			\item LANG: \verb;ADQL;, \verb;PQL;.
+			\item QUERY: e.g.: \verb;SELECT * FROM resource.table;.
+			\item FORMAT: \verb;text/xml;, \verb;fits;, \verb;text/html;, \verb;tsv;, \verb;votable/td; (\verb;VOTABLE; \emph{human-readable}), \\ \verb;text/tab-separated-values;, \verb;text/csv;, \verb;html;, \verb;votable; (\verb;VOTABLE; con \verb;base64;), \verb;application/fits;, \verb;votable/b2;, \verb;text/csv;.
+			\item MAXREC: número solicitado de filas. \verb;MAXREC = 0; retorna la meta data de la tabla.
+			\item RUNID: corre trabajos asincrónicos.
+		\end{itemize}
 \end{itemize}
 
 \paragraph{Capacidades de servicio}
