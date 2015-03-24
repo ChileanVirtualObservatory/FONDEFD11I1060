@@ -1,3 +1,152 @@
 \section{DaCHS}\label{anx:dachs}
 
-\label{anx:dachsparam}
+GAVO\footnote{German Astrophysical Virtual Observatory: \url{http://www.g-vo.org/}.} DaCHS\footnote{Data Center Helper Suite: \url{http://docs.g-vo.org/DaCHS/}.} es una infraestructura de publicación para el observatorio virtual, que incluye componentes flexibles para la ingestión y mapeo de datos, manejo de metadata integrada con un registro de publicación y soporte para muchos estándares y protocolos VO.
+
+\subsection*{Instalación}
+
+Los siguientes pasos se describen para una instalación en \verb;Debian GNU/Linux;. El primer paso es agregar el repositorio. Para ello se debe modificar el siguiente archivo:
+
+\begin{verbatim}
+/etc/apt/sources.list
+\end{verbatim}
+
+y agregar las siguientes líneas:
+
+\begin{verbatim}
+deb http://vo.ari.uni-heidelberg.de/debian stable main
+deb-src http://vo.ari.uni-heidelberg.de/debian stable main
+\end{verbatim}
+
+Tras esto se debe agregar las claves públicas del repositorio:
+
+\begin{verbatim}
+$ wget -qO - http://docs.g-vo.org/archive-key.asc | apt-key add -
+\end{verbatim}
+
+A continuación, se debe actualizar la lista de paquetes:
+
+\begin{verbatim}
+$ aptitude update
+\end{verbatim}
+
+Ahora viene la instalación, para ello se debe ejecutar lo siguiente:
+
+\begin{verbatim}
+$ aptitude install gavodachs-server
+\end{verbatim}
+
+Dentro del proceso de instalación se crea el grupo \verb;gavo; al cual se debe unir de la siguiente manera:
+
+\begin{verbatim}
+$ adduser ID gavo
+\end{verbatim}
+
+Tambi\'en se debe dar privilegios en la BD:
+
+\begin{verbatim}
+$ su - postgres
+$ createuser -s ID
+\end{verbatim}
+
+Finalmente, se debe iniciar el servicio web:
+
+\begin{verbatim}
+gavo init
+\end{verbatim}
+
+Con esto, DaCHS queda completamente instalado, el cual puede ser revisado en \verb;localhost:8080;.
+
+\subsection*{Conexión a base de datos externa}
+
+Se puede iniciar el servicio utilizando una BD ya creada, para esto se debe usar lo siguiente:
+
+\begin{verbatim}
+gavo init --dsn ``host=myhost.xy port=5546 user=super password=secret dbname=wisdom''
+\end{verbatim}
+
+\subsection*{Configuración de DaCHS}
+
+Para configurar ciertas características de DaCHS se debe crear el archivo \verb;/etc/gavo.rc;. Existen diversas opciones para configurar:
+
+\begin{verbatim}
+[general]
+rootDir: /data/gavo
+[web]
+adminpasswd: [ADMIN_PASSWORD]
+bindAddress: 
+serverPort: 8080
+serverURL: http://dachs.lirae.cl:8080
+sitename: LIRAE DaCHS
+\end{verbatim}
+
+Posteriormente, se debe considerar lo siguiente:
+
+\begin{itemize}
+	\item Luego de configurar, se debe reiniciar el servicio: \verb;gavo serve restart;.
+	\item El ejemplo anterior considera que \verb;/data/gavo; es la nueva dirección de la descripción de recursos (\verb;q.rd;) y los datos (\verb;fits;, \verb;asdm;, \verb;csv;, entre otros).
+	\item El esquema de archivos es generado por la herramienta.
+	\item \verb;[ADMIN_PASSWORD];: para ejecutar \verb;gavo pub -a;, el servicio tiene que volverse a cargar y para ello necesita la contraseña.
+	\item Con \verb;bindAddress: [espacio]; podemos acceder desde fuera de la máquina.
+\end{itemize}
+
+\subsubsection*{Configuraciones}
+
+\begin{itemize}
+	\item \verb;[web];:
+		\begin{itemize}
+			\item \verb;adminpasswd;: contraseña para la administración del servicio, necesaria para el comando: \verb;gavo serve reload;.
+			\item \verb;adsMirror;: repositorio para ADS\footnote{Astrophysics Data System.}. Por defecto: \url{http://ads.g-vo.org/}.
+			\item \verb;bindAddress;: por defecto direccionada a  '127.0.0.1'.
+			\item \verb;enableTests;: paginas de prueba. Valores: \verb;True;, \verb;False;. Valor por defecto es \verb;false;.
+			\item \verb;favicon;: dirección al \verb;favicon;, según \verb;webDir;.
+			\item \verb;graphicMimes;: \emph{MIME types} considerados como gráficos. Valor por defecto: \verb;image/fits,image/jpeg;.
+			\item \verb;maxPreviewWidth;: límite de ancho de las previsualizaciones, Valor por defecto: 300.
+			\item \verb;maxUploadSize;: tamaño máximo de archivos subidos. Valor por defecto: 20000000.
+			\item \verb;nevowRoot;: dirección de la raíz del servidor. Valor por defecto: \verb;/;.
+			\item \verb;preloadRDs;: lista de RD\footnote{Resource Descriptor.} que se pre cargan al iniciar el servidor. Es una lista de \emph{strings} y su valor por defecto es: \verb;'';.
+			\item \verb;previewCache;: dirección relativa a \verb;webDir;, para almacenar \emph{cache} de la previsualización. Valor por defecto: \verb;previewcache;.
+			\item \verb;realm;: autenticación de dominio. Valor por defecto: \verb;X.Unconfigured;.
+			\item \verb;serverPort;: puerto del servidor. Valor por defecto: 8080.
+			\item \verb;serverURL;: URL relativa cuando es necesario. Valor por defecto: \url{http://localhost:8080}.
+			\item \verb;sitename;: nombre del sitio, Valor por defecto: \emph{GAVO data center}.
+			\item \verb;sqlTimeout;: tiempo de espera para consultas. Valor por defecto: 15.
+			\item \verb;templateDir;: dirección de \verb;webDir;. Valor por defecto: \verb;templates;.
+			\item \verb;user;: usuario que corre el servidor. Valor por defecto: \verb;gavo;.
+		\end{itemize}
+	\item \verb;[ui];:
+		\begin{itemize}
+			\item \verb;outputEncoding;: codificación para los mensajes del sistema. Valor por defecto: \verb;iso-8859-1;.
+		\end{itemize}
+	\item \verb;[ivoa];:
+		\begin{itemize}
+			\item \verb;authority;: ID de autorización. Valor por defecto: \verb;x-unregistred;.
+			\item \verb;dalDefaultLimit;: límite exacto por defecto sobre las consultas SCS/SSAP/SIAP: 10000.
+			\item \verb;dalHardLimit;: límite exacto e irrevocable sobre las consultas SCS/SSAP/SIAP: 1000000.
+			\item \verb;oaipmhPageSize;: número de registros por página en la interfaz OAI-PMH. Valor por defecto: 500.
+			\item \verb;votDefaultEncoding; codificación por defecto para los \verb;VOTables;: \verb;binary;.
+		\end{itemize}
+	\item \verb;[adql];:
+		\begin{itemize}
+			\item \verb;webDefaultLimit;: límite exacto por defecto para consultas ADQL a trav\'es de un formulario web. Valor: 2000.
+		\end{itemize}
+	\item \verb;[async];:
+		\begin{itemize}
+			\item \verb;csvDialect;: el formato CSV es definido por el módulo CSV de \verb;python; usado cuando se escribe el CSV. Valor por defecto: \verb;excel;.
+			\item \verb;defaultExecTime;: tiempo de espera por defecto para los trabajos UWS, en segundos. Valor: 3600.
+			\item \verb;defaultExecTimeSync;: tiempo de espera por defecto para los trabajos UWS sincrónicos. Valor: 60.
+			\item \verb;defaultLifetime;: tiempo por defecto (en segundos) para destruir los trabajos UWS. Valor: 172800.
+			\item \verb;defaultMAXREC;: límite exacto por defecto para las consultas ADQL vía UWS/TAP. Valor: 2000.
+			\item \verb;hardMAXREC;: límite exacto e irrevocable para las consultas ADQL vía UWS/TAP. Valor: 20000000.
+			\item \verb;maxTAPRunning;: máximo número de trabajos TAP corriendo a la vez. Valor por defecto: 2.
+		\end{itemize}
+		\begin{itemize}
+			\item \verb;adqlProfiles;: nombres de perfiles que tienen acceso a las tablas abiertas por ADQL. Valor por defecto: \verb;untrustedquery;.
+			\item \verb;defaultLimit;: límite exacto por defecto para las consultas a la base de datos. Valor: 100.
+			\item \verb;interface;: no cambiar. Valor por defecto: \verb;psycopg2;.
+			\item \verb;maintainers;: nombre de los perfiles que deberían tener acceso completo para crear tablas por defecto en \verb;gavoimp;. Valor: \verb;admin;.
+			\item \verb;msgEncoding;: codificación de los mensajes provenientes de la base de datos. Valor por defecto: \verb;utf-8;.
+			\item \verb;profilePath;: ruta para localizar los perfiles de la base de datos. Valor por defecto: \verb;~/.gavo:$configDir;.
+			\item \verb;queryProfiles;: nombre de los perfiles que deberían ser capaces de leer por defecto las tablas creadas en \verb;gavoimp;.
+		\end{itemize}
+\end{itemize}
+
