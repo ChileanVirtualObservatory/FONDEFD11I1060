@@ -10,7 +10,7 @@ Los siguientes pasos se describen para una instalación en \verb;Debian GNU/Linu
 /etc/apt/sources.list
 \end{verbatim}
 
-y agregar las siguientes líneas:
+\noindent y agregar las siguientes líneas:
 
 \begin{verbatim}
 deb http://vo.ari.uni-heidelberg.de/debian stable main
@@ -139,6 +139,7 @@ Posteriormente, se debe considerar lo siguiente:
 			\item \verb;hardMAXREC;: límite exacto e irrevocable para las consultas ADQL vía UWS/TAP. Valor: 20000000.
 			\item \verb;maxTAPRunning;: máximo número de trabajos TAP corriendo a la vez. Valor por defecto: 2.
 		\end{itemize}
+	\item \verb;[db];:
 		\begin{itemize}
 			\item \verb;adqlProfiles;: nombres de perfiles que tienen acceso a las tablas abiertas por ADQL. Valor por defecto: \verb;untrustedquery;.
 			\item \verb;defaultLimit;: límite exacto por defecto para las consultas a la base de datos. Valor: 100.
@@ -148,5 +149,358 @@ Posteriormente, se debe considerar lo siguiente:
 			\item \verb;profilePath;: ruta para localizar los perfiles de la base de datos. Valor por defecto: \verb;~/.gavo:$configDir;.
 			\item \verb;queryProfiles;: nombre de los perfiles que deberían ser capaces de leer por defecto las tablas creadas en \verb;gavoimp;.
 		\end{itemize}
+\end{itemize}
+
+\subsubsection*{Cambiar de carpeta}
+
+Si se desea cambiar de ubicación los archivos y recursos, sólo basta cambiar las configuraciones en el siguiente archivo:
+
+\begin{verbatim}
+/etc/gavo.rc
+\end{verbatim}
+
+\noindent y modificar la siguiente línea:
+
+\begin{verbatim}
+[general]
+rootDir: PATH
+\end{verbatim}
+
+\noindent donde \verb;PATH; es la nueva ruta que contiene los recursos y datos. Luego es necesario dar los permisos correspondientes:
+
+\begin{verbatim}
+$ chown gavo:gavo PATH
+$ chown ID:gavo -R PATH
+\end{verbatim}
+
+Finalmente, se debe reiniciar el servicio:
+
+\begin{verbatim}
+gavo serve reload
+\end{verbatim}
+
+Mientras la nueva carpeta contenga todos los recursos (\verb;*.rd;, \verb;*.fits;, entre otros) no va existir problema.
+
+\subsection*{Control de DaCHS}
+
+\begin{description}
+	\item[Iniciar el servicio:] \verb;gavo serve start;
+	\item[Reiniciar las configuraciones del servicio\footnote{Esta acción no recarga las tablas.}:] \verb;gavo serve reload;
+	\item[Detener el servicio:] \verb;gavo serve stop;
+	\item[Reiniciar el servicio:] \verb;gavo serve restart;
+	\item[Implementar las tablas y recursos:] \verb;gavo imp resource_folder/q;
+	\item[Eliminar recurso:] \verb;gavo drop resource_folder/q;
+	\item[Evaluar recurso\footnote{De preferencia utilizarlo antes de implementar.}:] \verb;gavo val resource_folder/q;
+\end{description}
+
+\subsection*{Recursos predeterminados}
+
+Si se desea importar tablas determinadas, se puede hacer de la siguiente manera:
+
+\begin{itemize}
+	\item \verb;gavo imp --system //dc_tables;
+	\item \verb;gavo imp --system //services;
+	\item \verb;gavo imp --system //users;
+	\item \verb;gavo imp --system //adql;
+	\item \verb;gavo imp --system //tap;
+	\item \verb;gavo imp --system //products;
+	\item \verb;gavo imp --system //obscore;
+\end{itemize}
+
+Para ver los RD de estas tablas, se puede acceder al repositorio de la fuente (\verb;svn co; \url{http://svn.ari.uni-heidelberg.de/svn/gavo/python/trunk/}), y en \verb;gavo/resources/inputs;, se encontrarán los archivos. Estos archivos se podrán usar como \verb;Mixin; para construir tablas futuras.
+
+\subsection*{Descripción de recursos}
+
+Se debe crear un directorio en \verb;inputs;, de preferencia con el nombre del recurso (\verb;/var/gavo/inputs/MyResource/q.rd);. Para describir el nuevo recurso, el esquema, las tablas y su metadata, entre otros, se utiliza un archivo \verb;XML; con extensión \verb;.rd;. Una vez completo el \verb;q.rd;, se debe ir al directorio donde se encuentra el archivo, y se debe ejecutar lo siguiente:
+
+\begin{verbatim}
+gavo imp q
+\end{verbatim}
+
+La construcción del archivo \verb;q.rd; se realiza de la siguiente manera:
+
+\begin{verbatim}
+<?xml version=``1.0'' encoding=``iso-8859-1''?>
+
+<resource schema=``carpeta''>
+  <meta name=``title''>Titulo</meta>
+  <meta name=``creationDate''>2009-06-02T08:42:00Z</meta>
+  <meta name=``description'' format=``plain''>
+    Descripción.
+  </meta>
+  <meta name=``copyright''>Free to use.</meta>
+  <meta name=``creator.name''>Author, S.; Other, A.</meta>
+		 
+
+  <!-- Acá van las etiquetas relacionados al esquema -->
+  <meta name=``subject''>Large Magellanic Cloud</meta>
+  <meta name=``subject''>Interstellar medium, nebulae</meta>
+  <meta name=``subject''>Extinction</meta>
+
+  <meta name=``coverage''>
+    <meta name=``waveband''>Optical</meta>
+  </meta>
+
+  <meta name=``content.type''>Catalog</meta>
+
+  <!-- Acá se define la tabla, columna y sus especificaciones --> 
+  <table id=``NOMBRE_TABLA'' onDisk=``True'' adql=``True''>
+    <meta name=``description''>
+      DESCRIPCIÓN
+    </meta>
+    <column name=``NAME''
+      description=``DESCRIPCIÓN''/>
+    <column name=``centerAlpha''
+      required=``True''
+      ucd=``pos.eq.ra;meta.main''
+      unit=``deg''
+      tablehead=``RA''
+      description=``EJEMPLO: Area center RA ICRS''
+      verbLevel=``1''/>
+  </table>
+								     
+  <!-- Especificaciones sobre la data y como manejarla -->
+  <data id=``import_content''>
+
+    <!-- Se especifica el source -->
+    <sources pattern=``data/*.txt''/>
+    <reGrammar topIgnoredLines=``1''>
+      <names>raMin, raMax, decMin, decMax, ev_i, a_v, a_i</names>
+    </reGrammar>
+						    
+    <!-- Información de la tabla, generada de datos ingresados a la tabla -->
+    <make table=``NOMBRE_TABLA''>
+      <rowmaker id=``build_exts'' idmaps=``*''>
+        <var name=``raMin''>float(@raMin)</var>
+        <var name=``raMax''>float(@raMax)</var>
+        <var name=``decMin''>float(@decMin)</var>
+        <var name=``decMax''>float(@decMax)</var>
+					  
+        <map dest=``centerAlpha''>(@raMin+@raMax)/2.</map>
+        <map dest=``centerDelta''>(@decMin+@decMax)/2.</map>
+        <map dest=``bbox''>coords.Box\left( @raMin, @decMin),
+          (@raMax, @decMax))
+        </map>
+      </rowmaker>
+    </make>
+  </data>
+</resource>
+\end{verbatim}
+
+\subsection*{Importar RD}
+
+En primer lugar, se debe ir al directorio donde se encuentra el archivo \verb;q.rd;, y validarlo:
+
+\begin{verbatim}
+gavo val name_schema/q
+\end{verbatim}
+
+Con lo anterior se verificará si existe errores en la estructura del archivo. De haberlos, se deberá corregirlos, y validarlo nuevamente hasta que no exista errores. Ya sin errores, el archivo puede ser importado:
+
+\begin{verbatim}
+gavo imp name_schema/q
+\end{verbatim}
+
+Luego de lo anterior, aparecerán las tablas en el \emph{web service}.
+
+\subsection*{Publicar servicio}
+
+\subsubsection*{Simple Cone Search}
+
+Para utilizar los servicios de Simple Cone Search (SCS) de manera simplificada, se debe agregar lo siguiente:
+
+\begin{verbatim}
+<service id=``SERVICE_ID'' allowed=``scs.xml,form,static''>
+  <meta name=``shortName''>lmcextinct ConeSearch</meta>
+  <meta name=``testQuery''>
+    <meta name=``ra''>9.4076</meta>
+    <meta name=``dec''>9.6414</meta>
+  </meta>
+  <dbCore queriedTable=``TABLE_NAME''>
+    <condDesc original=``//scs#humanInput''/>
+    <condDesc original=``//scs#protoInput''/>
+  </dbCore>
+  <publish render=``scs.xml'' sets=``local''/>
+  <publish render=``form'' sets=``local''/>
+  <outputTable verbLevel=``20''/>
+</service>
+\end{verbatim}
+
+Algunas consideraciones:
+
+\begin{itemize}
+	\item Nótese que, en \verb;queriedTable=``TABLE_NAME'';, debe ir el mismo nombre de la tabla creado en este ejemplo como \verb;NOMBRE_TABLA;.
+	\item Para poder acceder a los métodos de acceso, debemos elegir \verb;sets=local;, \verb;ivo_managed; los registra en el VO.
+	\item Es necesario tener dos columnas con los UCD como index: \verb:pos.eq.ra;meta.main: y \verb:pos.eq.dec;meta.main:.
+\end{itemize}
+
+\subsubsection*{Simple Image Access Protocol}
+
+Para implementar SIAP se debe ejecutar lo siguiente:
+
+\begin{verbatim}
+$ gavo imp -m RECURSO/q && gavo imp //obscore create
+\end{verbatim}
+
+con \verb;-m; para modificar la tabla y \verb;//obscore; para crear la tabla/instancia en la tabla \verb;ivoa.ObsCore;. Importante es revisar los permisos para \verb;gavo; sobre los archivos \verb;FITS;.
+
+\paragraph{}
+\subparagraph{Mixin}
+
+El \verb;mixin //siap#pgs; agrega funcionalidades al protocolo SIA y asegura un cierto grupo de tablas para el protocolo. El \verb;mixin; se puede especificar como un hijo:
+
+\begin{verbatim}
+<table id=``table_id'' onDisk=``True'' adql=``True''>
+  <mixin>
+    //siap#pgs
+  </mixin>
+</table>
+\end{verbatim}
+
+\noindent o como un atributo:
+
+\begin{verbatim}
+<table id=``table_id'' onDisk=``True'' adql=``True'' mixin=``//siap#pgs''>
+  <!--COLUMNS-->
+</table
+\end{verbatim}
+
+\subparagraph{Recursos}
+
+Dentro de la etiqueta \verb;data;, se agrega lo siguiente para indicar de donde obtener los archivos de datos:
+
+\begin{verbatim}
+<sources recurse=``True''>
+  <pattern> PATH_TO_FILES/*.fits
+</sources>
+\end{verbatim}
+
+\subparagraph{Grammar}
+
+Con \verb;fitsProdGrammar\; podemos obtener el metadato del encabezado del archivo \verb;.fits;. Debemos agregar un \verb;rowfilter;, que agregará las columnas, \verb;owner; (\verb;key; para los dueños) y \verb;embargo; (Fecha de publicación):
+
+\begin{verbatim}
+<fitsProdGrammar qnd=``True''>
+  <!-- MAPEO FITS HEADER -->
+  <rowfilter procDef=``__system__/products#define''>
+    <bind key=``table''>``siapobsexample.spe''</bind>
+  </rowfilter>
+</fitsProdGrammar>
+<make table=``spe'' rowmaker=``ID_ROWMAKER'' />
+\end{verbatim}
+
+\verb;//products#define;, agrega a la tabla los siguientes elementos mostrados en la Tab.~\ref{tab:pd}:
+
+\begin{table}[ht!]
+	\begin{center}
+		\begin{tabular}{c|c|c}
+			Fila & Descripción & Valor por defecto \\\hline\hline
+			\verb;accref;	& acceso de referencia (input)	& \verb;inputRelativePath{False}; \\\hline
+			\verb;embargo;	& Fecha de publicación	        & None                            \\\hline
+			\verb;fsize;	& tamaño input	                & \verb;inputSize;                \\\hline
+			\verb;mime;	& Mime-Type	                & \verb;image/fits;               \\\hline
+			\verb;owner;	& Propietario	                & None                            \\\hline
+			\verb;path;	& Path al producto	        & \verb;inputRelativePath{True};  \\
+		\end{tabular}
+	\end{center}
+	\caption{Elementos agregados por \texttt{products\#define}.}\label{tab:pd}
+\end{table}
+
+\subparagraph{rowmaker}
+
+\begin{verbatim}
+<rowmaker id=``ID_ROWMAKER''>
+  <apply procDef=``//siap#computePGS''/>
+  <apply procDef=``//siap#setMeta''>
+    <bind name=``instrument''> </bind>
+    <bind name=``title''> ``TDT''</bind>
+  </apply>
+</rowmaker>
+\end{verbatim}
+
+Algunas consideraciones:
+
+\begin{itemize}
+	\item \verb;//siap#setMetaM; y \verb;bind;: para almacenar claves (\verb;key;) importantes para el usuario.
+		\begin{itemize}
+			\item \verb;vars[``CAMPO''];: se lee el \verb;CAMPO; de fits y se evalúa. Ej.: \verb;vars[``imageTitle''];, \verb;vars[``TELESCOP''];.
+			\item Con la etiqueta se puede crear campos especializados. Ej.: \verb;%s %s``%(@TELESCOP,@DATE_OBS);.
+			\item Si algún campo del archivo \verb;.fits; contiene un carácter \verb;-;, debe ser reemplazado por \verb;_;.
+		\end{itemize}
+	\item No se debe agregar \verb;idmaps=''*``; a \verb;rowmaker;.
+	\item Se puede agregar mapeo de datos desde los FITS:
+		\begin{itemize}
+			\item Los campos se leen de la forma \verb;@campo;.
+		\end{itemize}
+\end{itemize}
+
+\subparagraph{\texttt{Service} y \texttt{dbCore}}
+
+\begin{itemize}
+	\item Se debe indicar ciertos atributos como:
+		\begin{itemize}
+			\item id del servicio.
+			\item Servicios aprobados: Atributo \verb;allowed; en \verb;service;, indica qu\'e servicios serán publicados o mostrados.
+		\end{itemize}
+	\item Indica qu\'e  servicios se publicarán:
+		\begin{itemize}
+			\item Atributo \verb;sets;: lista de dónde serán publicados los servicios (\verb;local; o \verb;ivo_managed;).
+			\item Atributo \verb;render;: indica qu\'e servicio se publica.
+		\end{itemize}
+\end{itemize}
+
+\begin{verbatim}
+<service id=``SIAP_NAME_ID'' allowed=``form,siap.xml''>
+  <meta name=``shortName''>SIAP_NAME</meta>
+  <meta name=``title''>``SIAP_TITLE''</meta>
+  <publish render=``siap.xml'' sets=``local''/>
+  <publish render=``form'' sets=``local'' />
+  <!-- CORES -->
+  <dbCore id=``ID_CORE'' queriedTable=``TABLE_NAME''>
+    <condDesc original=``//siap#protoInput''/>
+    <condDesc original=``//siap#humanInput''/>
+  </dbCore>
+</service>
+\end{verbatim}
+
+\subsubsection*{Table Access Protocol}
+
+Dentro de la etiqueta \verb;data;, se registra el servicio TAP:
+
+\begin{verbatim}
+<data>
+  \ldots
+  <register services=``__system__{/tap#run''/>
+</data>
+\end{verbatim}
+
+\subsubsection*{Publicar}
+
+Se agrega \verb;adminpasswd; en \verb;/etc/gavo.rc;, y luego de tener listo el archivo \verb;q.rd;, se debe publicar los servicios:
+
+\begin{itemize}
+	\item Publicar todos los servicios: \verb;gavo pub -a;.
+	\item Publicar un \verb;rd; en específico: \verb;gavo pub resource_folder/rd_name;.
+\end{itemize}
+
+Es recomendable evaluar \verb;gavo val resource_name/rd_name; antes de importar y publicar.
+
+\subsection*{Plantilla}
+
+El servicio web viene con una plantilla (\emph{template}) por defecto, pero se puede cambiar. Para esto se debe copiar el directorio \verb;gavo/resources/templates/; al directorio \verb;/var/gavo/web;. Editar \verb;root.html\; para cambiar la pagina principal.
+
+\subsection*{Defaultmeta.txt}
+
+Se puede definir metadata del \verb;publisher;, \verb;contact;, \verb;authority;, entre otros, de DaCHS. Esto es necesario configurar para \verb;registry;:
+
+\begin{itemize}
+	\item \verb;publisher: Fill Out;
+	\item \verb;publisherID: ivo://x-unregistred;
+	\item \verb;contact.name: Fill Out;
+	\item \verb;contact.address: Ordinary street address.;
+	\item \verb;contact.email: Your email address;
+	\item \verb;contact.telephone: Delete this line if you don't want to give it;
+	\item \verb;creator.name: Could be same as contact.name;
+	\item \verb;creator.logo: a URL pointing to a small png;
 \end{itemize}
 
