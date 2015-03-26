@@ -1,1 +1,18 @@
 \section{Virtualización}\label{anx:virtualizacion}
+
+Pensando en un futuro cercano, cuando la cantidad de datos manejados por ChiVO alcancen niveles sólo soportados por un centro de datos de a lo menos mediana escala, se ha decidido diseñar una arquitectura totalmente escalable, y de fácil traslado, esto último pensando en que los servidores actualmente disponibles no darán a basto en un mediano plazo. Es por ello que se ha estudiado la posibilidad de virtualizar los servidores con herramientas como OpenStack\footnote{\url{https://www.openstack.org/}.} y oVirt\footnote{\url{http://www.ovirt.org/}.}, siendo esta última la alternativa elegida. A continuación se describe el trabajo realizado.
+
+\subsection*{oVirt}
+
+oVist es una aplicación código abierto de administración de virtualización. Permite virtualizar desde máquinas virtuales hasta redes. Entre sus componentes están el \emph{manager}, que es el encargado de administrar los \emph{hosts} donde se alojan las máquinas virtuales, además de proveer la interfaz web mediante la cual se puede realizar las tareas admnistrativas tanto de las máquinas virtuales como de la infraestructura en sí, como lo es el manejo de usuario, integración de nuevos \emph{hosts}, almacenamiento, redes virtuales, entre otros. Por otro lado están los \emph{hosts}, quienes son los que alojan las máquinas virtuales y el lugar donde se desarrolla la virtualización en sí.
+
+Entre las principales características de oVirt se encuentran las siguientes:
+
+\begin{itemize}
+	\item Migración de máquinas 'en caliente’ entre distintos \emph{hosts}.
+	\item Facilidad al agregar nuevos \emph{hosts}.
+	\item Interfaz web tanto con su lado administrativo donde se puede observar los recursos disponibles tales como memoria RAM o disco duro, además de FQDN\footnote{Fully Qualified Domain Name.}, IPs y algún comentario que se puede marcar en cada máquina. Por otro lado como para usuario se puede acceder a las opciones básicas como: encendido, apagado, reinicio, abrir interfaz VNC/SPICE\footnote{Virtual Network Computing/Simple Protocol for Independent Computing Environments.}.
+	\item Manejo de quotas.
+\end{itemize}
+
+
