@@ -1,1 +1,25 @@
 \section{Ruby on Rails}\label{anx:ror}
+
+Ruby on Rails\textsuperscript{\copyright{}} es un \emph{framework} para el desarrollo web de código abierto que está optimizado para la felicidad y productividad sostenible del programador. Permite escribir un bello código favoreciendo la convención por sobre la configuración\footnote{\url{http://rubyonrails.org/}.}.
+
+\subsection*{Ayuda para desarrollar}
+
+Inicialmente, el ambiente de desarrollo se encontraba en la plataforma Heroku\footnote{\url{https://www.heroku.com/}.}, plataforma como servicio (PaaS) en la nube que soporte diferentes lenguajes de programación. La ventaja de contar con una PaaS, es no preocuparse de montar un ambiente de desarrollo, debido a que se desarrolla directamente en la plataforma. Para este proyecto, ello conlleva una desventaja, y es que uno de los objetivos del proyecto es contar con la información de los observatorios astronómicos ubicados en Chile, en un observatorio virtual ubicado en Chile, y los servidores de Heroku no lo están.
+
+Es por eso que para la etapa de despliegue, se ha decidido montar una arquitectura propia en los servidores disponibles para el proyecto. Cabe destacar que Heroku pone a disposición el código desarrollado en el sistema de control de versiones \verb;Git;, por lo que se ha tomado el repositorio, se ha clonado y se ha puesto a disposición en la plataforma GitHub\footnote{\url{https://github.com/ChileanVirtualObservatory/web}.}. Para el despliegue, se ha creado una rama denominada \verb;deployment;\footnote{\url{https://github.com/ChileanVirtualObservatory/web/tree/deployment}.}.
+
+Si se desea obtener el código con el cual se está realizando el despliegue, se debe realizar lo siguiente:
+
+\begin{itemize}
+	\item \verb;$ git clone -b deployment git@github.com:ChileanVirtualObservatory/web.git;
+	\item \verb;$ cd web/\; (carpeta con el repositorio web localmente sólo con la rama \verb;deployment;).
+	\item \verb;$ bundle install;
+	\item \verb;$ rake db:migrate RAILS_ENV=deployment;
+\end{itemize}
+
+Para mantener actualizado el repositorio, se debe realizar lo siguiente:
+
+\begin{itemize}
+	\item Actualizar copia local: \verb;$ git pull origin deployment;
+	\item Subir cambios a servidor: \verb;$ git push origin deployment;
+\end{itemize}
