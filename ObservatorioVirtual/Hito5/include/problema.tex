@@ -1,6 +1,6 @@
 \section{Definición del Problema}
 
-El problema abordado para este hito es el despliegue del sistema en una infraestructura de estándares profesionales, lo cual inicialmente no ocurrió. Como ya se ha mencionado, el sistema se trabajó en una arquitectura de 3 capas, formando a comienzos del proyecto 3 equipos de trabajo, cada uno encargado de cada capa. El problema de esto fue que cada equipo trabajó de manera independiente, utilizando versiones propias de cada software de desarrollo y no verificando la compatibilidad entre los diferentes \emph{frameworks} utilizados.
+El problema abordado para este hito es el despliegue del sistema en una infraestructura de estándares profesionales, lo cual inicialmente no ocurrió. Como ya se ha mencionado, el sistema se trabajó en una arquitectura de 3 capas, formando a comienzos del proyecto 3 equipos de trabajo, cada uno encargado de cada capa. El problema de esto fue que cada equipo trabajó de manera independiente. Incluso, dentro de cada equipo las tareas fueron divididas en subgrupos, utilizando versiones propias de cada software de desarrollo y no verificando la compatibilidad entre los diferentes \emph{frameworks} utilizados.
 
 En la Tab.~\ref{tab:versiones} se detalla la lista de software utilizado con sus respectivas versiones para cada una de las capas del sistema.
 
@@ -8,16 +8,14 @@ En la Tab.~\ref{tab:versiones} se detalla la lista de software utilizado con sus
 	\begin{center}
 		\begin{tabular}{c|c|c|c}
 			Software & Backend & Endpoint & Frontend \\\hline\hline
-			\texttt{python} &  &  &   \\\hline
-			\texttt{python-flask} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\\hline
-			\texttt{} &  &  &   \\
+			\texttt{python} (equipo 1) &  & 2.7.3 &   \\\hline
+			\texttt{python} (equipo 2) &  & 2.7.5 &   \\\hline
+			\texttt{Ruby} (equipo 1) &  &  & 2.0.0  \\\hline
+			\texttt{Ruby} (equipo 2) &  &  & 2.1.0  \\\hline
+			\texttt{Apache} (equipo 1) &  & 2.2.22 (Debian) &   \\\hline
+			\texttt{Apache} (equipo 2) &  & 2.4.6 (CentOS) &   \\\hline
+			\texttt{DaCHS} & 0.9.1 &  &   \\\hline
+			\texttt{PostgreSQL} & 9.1 &  &   \\
 		\end{tabular}
 	\end{center}
 	\caption{Listado de versiones de software utilizadas por capa.}\label{tab:versiones}
