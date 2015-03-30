@@ -69,14 +69,14 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \paragraph{Capacidades de servicio}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/tap/capabilities}.
 	\item M\'etodo: \verb;GET;.
 \end{itemize}
 
 \paragraph{Consulta sincrónica}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/tap/sync}.
 	\item M\'etodo: \verb;POST;.
 	\item Retorno: \verb;VOTABLE;.
 \end{itemize}
@@ -86,7 +86,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subparagraph{Nueva consulta}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/tap/async}.
 	\item M\'etodo: \verb;POST;.
 	\item Retorno: \verb;VOTABLE; con un \verb;id; de la consulta.
 \end{itemize}
@@ -94,7 +94,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subparagraph{Lista de consultas}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/tap/async}.
 	\item M\'etodo: \verb;GET;.
 	\item Parámetros: no hay.
 	\item Retorno: \verb;UWL;, un archivo \verb;xml; con todas las consultas y sus estados.
@@ -103,7 +103,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subparagraph{Información de la consulta}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/tap/async/:id}.
 	\item M\'etodo: \verb;GET;.
 	\item Parámetros: no hay.
 	\item Retorno: \verb;UWL; con es estado de la consulta.
@@ -112,7 +112,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subparagraph{Otras opciones}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/tap/async/:id/:option}.
 	\item M\'etodo: \verb;GET;.
 	\item Parámetros: \verb;option phase;, \verb;quote;, \verb;executionduration;, \verb;destruction;, \verb;error;, \verb;parameters;, \verb;results;, \verb;owner;.
 \end{itemize}
@@ -120,7 +120,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subsubsection*{{\sc Simple Cone Search}}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/scs}.
 	\item M\'etodo: \verb;GET;.
 	\item Atributos: 
 		\begin{itemize}
@@ -133,7 +133,7 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \subsubsection*{{\sc Simple Image Access}}
 
 \begin{itemize}
-	\item WEB: \url{}.
+	\item WEB: \url{http://endpoint.lirae.cl/alma/sia}.
 	\item M\'etodo: \verb;GET;.
 	\item Atributos: 
 		\begin{itemize}
@@ -161,11 +161,11 @@ Flask es un \emph{microframework} para Python basado en \emph{Werkzeug}, \emph{J
 \paragraph{Obtener servicios JSON externos}
 
 \begin{itemize}
-	\item Para obtener un servicio específico (no todos los datos, sólo \verb;shortname;, \verb;title; y \verb;accessURL;: \url{}. Servicio puede ser \verb;tap;, \verb;scs;, \verb;sia; y \verb;ssa;.
+	\item Para obtener un servicio específico (no todos los datos, sólo \verb;shortname;, \verb;title; y \verb;accessURL;: \url{http://endpoint.lirae.cl/external/{service}}. Servicio puede ser \verb;tap;, \verb;scs;, \verb;sia; y \verb;ssa;.
 \end{itemize}
 
 \subsubsection*{\emph{Harvesting Interface}}
 
 \begin{itemize}
-	\item Registry harvesting interface: \url{}.
+	\item Registry harvesting interface: \url{http://endpoint.lirae.cl/oai.xml?}.
 \end{itemize}
