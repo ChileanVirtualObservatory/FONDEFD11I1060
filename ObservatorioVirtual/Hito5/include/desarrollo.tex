@@ -32,16 +32,64 @@ La implementación o despliegue de un software corresponde a un conjunto de acti
 		\begin{description}
 			\item [Comprobación previa a la instalación] Antes de la instalación en sí, se debe realizar varias comprobaciones, fundamentalmente relacionadas con el esquema de virtualización y los sistemas operativos dipuestos en los servidores virtuales donde se instalará ChiVO, así como tambi\'en las versiones de los paquetes de software que soportarán al observatorio virtual. Una descripción detallada de todo esto se encuentra en los anexos \S\ref{anx:virtualizacion}, \S\ref{anx:dachs}, \S\ref{anx:flask} y \S\ref{anx:ror}.
 			\item [Hacer posible un \emph{rollback}] Tanto el código fuente como la base de datos se maneja sobre sistemas de control de versiones. Esto permite que ante eventuales cambios que puedan mermar la funcionalidad del sistema, se pueda volver a un punto anterior cuya funcionalidad est\'e al 100\%. Es importante destacar en este punto que los cambios que pudieran hacerse al código jamás se harán ``en caliente'', esto es, en el sistema que está en producción. Los cambios a realizar siempre se harán sobre un ambiente de desarrollo. Futuras actualizaciones estarán relacionadas a mejoras y adecuaciones a nuevas versiones de los paquetes de software necesarios para su funcionamiento. No obstante aquello, siempre se mantendrá una versión estable a la cual volver en caso de alguna emergencia.
-			\item [Instalación del producto]
-			\item [Transferir el producto desde una ambiente de pruebas a uno de producción]
-			\item [Mantenimiento de la información sobre el producto desplegado]
+			\item [Instalación del producto] Como ya se ha mencionado anteriormente, ChiVO es una herramienta que se encuentra en la nube, por lo que su utilización puede ser de dos maneras: utilizando su interfaz web o utilizando otras herramientas del tipo \emph{standalone}. Para el primer caso, el usuario no debe instalar absolutamente nada. Sólo basta con que cuente con una navegador, el cual se da por entendido que ya tiene instalado. Si desea utilizar otra herramienta para conectarse a ChiVO, deberá leer la documentación de la herramienta en particular para poder instalarla y utilizar los servicios disponibles por ChiVO. Dado lo anterior, la herramienta debe ser instalada sólo en el lado del servidor, lo cual se ha realizado sin mayores problemas, tanto en un ambiente de desarrollo como en un ambiente de producción y con la mayoría de los pasos automatizados. Cabe destacar que futuras actualizaciones de la herramienta se llevarán a cabo en primer lugar en un ambiente de pruebas, y cuando pase las pruebas de funcionamiento, será llevado al ambiente de producción, siendo estos cambios transparentes para el usuario.
+			\item [Transferir el producto desde un ambiente de pruebas a uno de producción] Al ser ChiVO una herramienta disponible en la modalidad de software como servicio (\emph{Software as a Service, SaaS}), no existe un ambiente de pruebas en el lado del cliente, si no que solamente lo hay en el lado del servidor. Durante el periodo de desarrollo de la herramienta, se puso a disposición una versión beta\footnote{\url{http://beta.chivo.cl/}.}, la cual constantemente ha sido actualizada con mejoras y arreglo de problemas. Una vez estabilizada esta versión, luego de innuberables pruebas, se ha establecido una versión estable de la herramienta a la cual se podrá acceder en la dirección \url{http://www.chivo.cl/}\footnote{Esta versión estará disponible desde el día 24 de abril de 2015, fecha del lanzamiento oficial de la herramienta.}, lo cual se ha realizado simplemente transfiriendo los archivos desde el ambiente de pruebas a una ambiente de producción. De ahora en adelante, la versión estable tambi\'en es mantenida en un ambiente de desarrollo, donde se trabajará en futuras mejoras, las cuales pasarán a una versión estable cuando corresponda.
+			\item [Mantenimiento de la información sobre el producto desplegado] En el pie de página del sitio web de la herramienta, se encuentra la información sobre la versión de la misma. Además, en la sección \S\ref{sec:doc} se podrá encontrar el detalle de la documentación en línea del sistema, fundamentalmente en lo que respecta a su desarrollo.
 		\end{description}
-	\item [Pruebas al producto instalado]
+	\item [Pruebas al producto instalado] Aunque todas las versiones son probadas durante el proceso de desarrollo, ciertas actividades de prueba son todavía necesarias durante el despliegue. A continuación se describe cada una de ellas.
 		\begin{description}
-			\item [Pruebas por parte de los desarrolladores]
-			\item [Pruebas por parte de los usuarios]
+			\item [Pruebas por parte de los desarrolladores] Una vez alcanzada una versión estable, la herramienta ha sido probada por parte de los desarrolladores, debiendo corroborar el correcto funcionamiento según la descripción del documento de casos de uso. Los tipos de prueba realizados fueron los siguientes:
+				\begin{description}
+					\item[Pruebas de instalación] Asegurarse que el sistema quede instalado correctamente.
+					\item[Pruebas de compatibilidad] Al ser una herramienta web, se verifica que funcione con diferentes navegadores: Google Chrome\footnote{\url{https://www.google.com/chrome/}.}, Firefox\footnote{\url{https://www.mozilla.org/es-CL/firefox/new/}.}, Iceweasel\footnote{\url{https://wiki.debian.org/Iceweasel}.}, Internet Explorer\footnote{\url{http://windows.microsoft.com/es-es/internet-explorer/download-ie}.} y Safari\footnote{\url{https://www.apple.com/cl/safari/}.}. Además, se prueba algunas herramientas que permiten conectarse a ChiVO mediante sus interfaces, como \textsc{TOPCAT}\footnote{\url{http://www.star.bris.ac.uk/~mbt/topcat/}.} y \textsc{Aladin}\footnote{\url{http://aladin.u-strasbg.fr/}.}.
+					\item[Pruebas de humo] Actualmente la herramienta soporta 3 tipos de búsquedas, las cuales fueron rápidamente probadas, y así determinar si seguir o no con otras pruebas. De haber fallado, se debía corregir inmediatamente antes de seguir con las otras pruebas.
+					\item[Pruebas de regresión] Iniciada la etapa de despliegue, se pudo observar algunas funcionalidades perdidas. Se tenía la certeza que \'esta había sido desarrollada, pero ya no se encontraba presente. Allí se realiza una prueba de regresión para determinar en qu\'e momento esta funcionalidad fue eliminada, y cómo puede ser recuperada.
+					\item[Pruebas funcionales] Se elaboró baterías de pruebas para cada una de las búsquedas, las cuales fueron ejecutadas para verificar el funcionamiento de cada una de las características que deben estar presente en la herramienta.
+					\item[Pruebas no funcionales] Con la misma batería de pruebas del punto anterior, se probó el rendimiento de la aplicación, siendo comparada con otros observatorios virtuales. Estas pruebas arrojaron un rendimiento bastante similar a sus pares extranjeros.
+					\item[Pruebas destructivas] Se realizó pruebas con la finalidad que el sistema falle. Fue así como se determinó que en la lista de solicitudes que pueden ser pasadas a la vez, existe una cota máxima, la cual fue restringida con un mensaje previa a ser ejecutada, y así evitar que el sistema se caiga.
+					\item[Pruebas de internalización y localización] Se prueba que el ingreso con caracteres en castellano no hagan fallar al sistema. En particular se realiza esto pues el sistema si bien trabaja sobre estándares que determinan que los nombres de objetos astronómicos se encuentren en ingl\'es, al ser un sitio chileno existe una probabilidad considerable que sean ingresados por error caracateres en castellano.
+					\item[Pruebas A/B] Cada una de las búsquedas posee diferentes parámetros. Se realizó pruebas con cada uno de ellos y comparando las búsquedas al modificar sólo uno de ellos. Por ejemplo, en una búsqueda de datos espectrales se ingresaba los parámetros de \verb;RA;, \verb;DEC; y \verb;Size;, dejando el parámetro \verb;Band; en blanco. Luego se realizaba la misma búsqueda pero se ingresaba un valor para \verb;Band;, y se comparaba los resultados. Esto permite saber que la búsqueda con parámetros opcionales estuviera funcionando correctamente.
+					\item[Pruebas de concurrencia] Con el objetivo de medir la robustez y rendimiento del sistema, se realizó pruebas continuas en condiciones normales defectos en la herramienta al haber actividad adicional. No se encontró anomalías con ejecutar pruebas concurrentes.
+				\end{description}
+			\item [Pruebas por parte de los usuarios] Luego de realizadas las pruebas por parte de los desarrolladores, el sistema fue presentado a potenciales usuarios (comunidad astronómica), con el fin de recibir comentarios y sugerencias por parte de ellos. Las pruebas con los usuarios fueron las siguientes:
+				\begin{description}
+					\item[Pruebas beta] Se selecciona un grupo acotado de usuarios del sistema, a quienes se les invita a probar la herramienta para recibir una retroalimentación. De estas pruebas se definie una versión final a ser presentada abiertamente a diferentes usuarios.
+					\item[Pruebas de aceptación] El sistema es presentado a los usuarios, quienes lo utilizan en sus propios entornos y entregan comentarios de mejoras muy menores, las cuales han sido corregidas para su completa aceptación.
+					\item[Pruebas de usabilidad] Se chequea con usuarios que la interfaz sea fácil de utilizar y entender. No hay reparos por parte de los usuarios.
+				\end{description}
 		\end{description}
 \end{description}
 
 \subsection{Documentación}\label{sec:doc}
 
+El Observatorio Virtual Chileno fue desarrollado sobre una arquitectura de 3 capas: \emph{backend}, \emph{endpoint} y \emph{frontend}. El desarrollo de cada una de las capas ha sido debidamente documentado y puesto a disposición de los interesados en diferentes plataformas en línea, para facilitar su acceso. A continuación se detallará la ubicación de la documentación de cada una de las capas:
+
+\begin{description}
+	\item[\emph{Backend}] La capa de datos está compuesta fundamentalmente por la herramienta \textsc{DaCHS}, la cual es descrita en el anexo \S\ref{anx:dachs}. Además, los archivos binarios manejados se encuentran en una base de datos \textsc{PostgreSQL}. La documentación de esta capa puede ser encontrada en las siguientes direcciones:
+		\begin{itemize}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/WorklogDachsToolkit}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/DaCHSResourceDescription}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/CBEWorklogsPatricoRamirez}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/ChivoPrototypeResourceWorklog}
+		\end{itemize}
+		En el listado precedente se encontrará toda la documentación desde como instalar las herramientas, hasta su funcionamiento.
+	\item[\emph{Endpoint}] La capa de aplicación fue desarrollada sobre el \emph{miniframework} \verb;python-flask;, cuya descripción puede ser revisada en el anexo \S\ref{anx:flask}. Toda la documentación de lo realizado en esta capa se puede encontrar en la siguiente lista de direcciones:
+		\begin{itemize}
+			\item \url{https://github.com/ChileanVirtualObservatory/flask\_endpoint}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/FranciscoLiraEndpointDocumentationWorklog}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/EPWorklogsCamiloValenzuela}
+			\item \url{http://twiki.csrg.cl/twiki/bin/view/LIRAE/EPWorklogsFranciscoLira}
+		\end{itemize}
+	\item[\emph{Frontend}] La capa de vistas fue desarrollado sobre el \emph{framework} \verb;Ruby on Rails;. Toda la documentación sobre esta capa se encuentra en la siguiente dirección:
+		\begin{itemize}
+			\item \url{http://redmine.csrg.cl/projects/front-end/wiki}
+		\end{itemize}
+\end{description}
+
+Además, se ha agregado una breve documentación de funcionamiento de la herramienta, en la cual se explica cómo realizar las búsquedas, ingresando cada uno de sus parámetros. Junto con ello, se deja a disposición un listado con herramientas mediante las cuales se puede acceder a ChiVO, junto con las direcciones de la documentación disponible de cada una de las herramientas. La documentación se encontrará en la siguiente dirección:
+
+\begin{itemize}
+	\item \url{http://www.chivo.cl/documentation}
+\end{itemize}
+
+Cabe destacar que el sitio \url{http://www.chivo.cl} estará disponible desde el día 24 de abril de 2015, y que actualmente la versión final se encuentra disponible en una dirección temporal, al igual que la documentación antes mencionada. La dirección temporal correspondiente a un ambiente de pruebas es \url{http://frontend.lirae.cl/}, la cual dejará de existir a partir de la fecha de lanzamimento.
