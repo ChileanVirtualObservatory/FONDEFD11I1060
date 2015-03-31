@@ -1,32 +1,118 @@
 \section{Desarrollo de la solución}
 
-Como se ha mencionado en las secciones anteriores, este hito comprende el desarrollo de dos grandes secciones. La primera está relacionada con el despliegue de la aplicación, de tal manera de contar con una arquitectura moderna, escalable, segura y por sobre los estándares mínimos requeridos para la producción de software. El segundo tiene relación con una adecuada documentación en línea que permita una completa utilización de ChiVO, tanto bajo su interfaz web como su uso mediante otras herramientas.
+Como se ha mencionado en las secciones anteriores, este hito comprende el
+desarrollo de dos grandes secciones. La primera está relacionada con el
+despliegue de la aplicación, de tal manera de contar con una arquitectura
+moderna, escalable, segura y por sobre los estándares mínimos requeridos para la
+producción de software. El segundo tiene relación con una adecuada documentación
+en línea que permita una completa utilización de ChiVO, tanto bajo su interfaz
+web como su uso mediante otras herramientas.
 
-Para realizar un exitoso despliegue se requiere de una infraestructura de acuerdo a las necesidades requeridas. Esto puede parecer una obviedad, pero es importante destacarlo pues no existe una fórmula única para determinar la arquitectura a utilizar. Dado esto, se realizó un completo estudio de las alternativas existentes y que estuvieran al alcance de este proyecto, para luego tomar las decisiones de qu\'e opciones tomar e implementarlas. La descripción de esto se encuentra en el Anexo \ref{anx:virtualizacion}. Además, en la sección de anexos se encuentra la descripción de cómo instalar: DaCHS (Anexo \ref{anx:dachs}), herramienta fundamental del \emph{backend}; \texttt{python-flask} (Anexo \ref{anx:flask}), \emph{microframework} en el que fue desarrollado el \emph{endpoint}; y Ruby on Rails (Anexo \ref{anx:ror}), \emph{framework} en el que fue desarrollado el \emph{frontend}.
+Para realizar un exitoso despliegue se requiere de una infraestructura de
+acuerdo a las necesidades requeridas. Esto puede parecer una obviedad, pero es
+importante destacarlo pues no existe una fórmula única para determinar la
+arquitectura a utilizar. Dado esto, se realizó un completo estudio de las
+alternativas existentes y que estuvieran al alcance de este proyecto, para luego
+tomar las decisiones de qu\'e opciones tomar e implementarlas. La descripción de
+esto se encuentra en el Anexo \ref{anx:virtualizacion}. Además, en la sección de
+anexos se encuentra la descripción de cómo instalar: DaCHS (Anexo
+\ref{anx:dachs}), herramienta fundamental del \emph{backend};
+\texttt{python-flask} (Anexo \ref{anx:flask}), \emph{microframework} en el que
+fue desarrollado el \emph{endpoint}; y Ruby on Rails (Anexo \ref{anx:ror}),
+\emph{framework} en el que fue desarrollado el \emph{frontend}.
 
 A continuación se detalla cada una de estas secciones y las actividades que conllevan.
 
 \subsection{Despliegue}
 
-La implementación o despliegue de un software corresponde a un conjunto de actividades cuyo objetivo final es hacer que el sistema de software quede listo para ser usado. Si bien existen definiciones estandarizadas de cómo realizar un despliegue de software tales como CMM \cite{cmm}, ITIL \cite{itil} y SEWBOK \cite{swebok}, las cuales proveen de directrices generales, sus descripciones son a menudo muy generales y omiten las ideas desarrolladas a partir de los retos y soluciones experimentadas por profesionales del área. Por lo mismo, se presenta en este informe una clasificación descriptiva de las diferentes actividades inmersas dentro del despliegue de software \cite{deployActivities}:
+La implementación o despliegue de un software corresponde a un conjunto de
+actividades cuyo objetivo final es hacer que el sistema de software quede listo
+para ser usado. Si bien existen definiciones estandarizadas de cómo realizar un
+despliegue de software tales como CMM \cite{cmm}, ITIL \cite{itil} y SEWBOK
+\cite{swebok}, las cuales proveen de directrices generales, sus descripciones
+son a menudo muy generales y omiten las ideas desarrolladas a partir de los
+retos y soluciones experimentadas por profesionales del área. Por lo mismo, se
+presenta en este informe una clasificación descriptiva de las diferentes
+actividades inmersas dentro del despliegue de software \cite{deployActivities}:
 
 \begin{description}
-	\item [Comunicación con los interesados (stakeholders)] La transferencia de conocimiento sobre el producto de software, su despliegue, y cambios en la funcionalidad interna son críticos para un despliegue exitoso. A continuación se describe las actividades que han permitido el despliegue de ChiVO sin mayores inconvenientes:
+	\item [Comunicación con los interesados (stakeholders)] La transferencia de
+conocimiento sobre el producto de software, su despliegue, y cambios en la
+funcionalidad interna son críticos para un despliegue exitoso. A continuación se
+describe las actividades que han permitido el despliegue de ChiVO sin mayores
+inconvenientes:
 		\begin{description}
-			\item [Informar a los interesados de los contenidos del despliegue] La meta de esta actividad es mantener a los interesados en el proyecto informados sobre el despliegue. Esto es de suma importancia, pues a pesar que el proyecto se encuentra aún en fases de desarrollo, se encuentra una versión beta\footnotemark{} disponible en \url{http://beta.chivo.cl/}, la cual es accedida por todos los interesados del proyecto, e incluso promocionada. Por lo mismo ha sido importante señalar que su funcionamiento puede verse afectado por mejoras implementadas, y más aún, cuando se está en una fase de despliegue. En esta fase el sistema muchas veces no estará disponible en la dirección antes mencionada, por lo que se ha informado tanto a los equipos de desarrollo, como a investigadores, profesores y director del proyecto, lo que se está realizando y el por qu\'e.
+			\item [Informar a los interesados de los contenidos del despliegue] La
+meta de esta actividad es mantener a los interesados en el proyecto informados
+sobre el despliegue. Esto es de suma importancia, pues a pesar que el proyecto
+se encuentra aún en fases de desarrollo, se encuentra una versión
+beta\footnotemark{} disponible en \url{http://beta.chivo.cl/}, la cual es
+accedida por todos los interesados del proyecto, e incluso promocionada. Por lo
+mismo ha sido importante señalar que su funcionamiento puede verse afectado por
+mejoras implementadas, y más aún, cuando se está en una fase de despliegue. En
+esta fase el sistema muchas veces no estará disponible en la dirección antes
+mencionada, por lo que se ha informado tanto a los equipos de desarrollo, como a
+investigadores, profesores y director del proyecto, lo que se está realizando y
+el por qu\'e.
 
 				\footnotetext{Corresponde a una fase del desarrollo de software que representa una primera versión del producto, que por lo general se presenta como software inestable y que sirve para realizar pruebas con el sistema operando.}
-			\item [Entrenamiento de los usuarios] El Observatorio Virtual es una herramienta orientada fundamentalmente a la comunidad astronómica, pero tambi\'en a la comunidad en general. Por lo mismo es bastante complicado acotar el número de usuarios, e incluso identificarlos, como para entregar una capacitación personalizada. Por ello es que se ha trabajado en una documentación en línea que permita a cualquier usuario utilizar el sistema, en sus diferentes modalidades. Esto se explica con mayor detalle en la sección \S\ref{sec:doc}.
+			\item [Entrenamiento de los usuarios] El Observatorio Virtual es una
+herramienta orientada fundamentalmente a la comunidad astronómica, pero
+tambi\'en a la comunidad en general. Por lo mismo es bastante complicado acotar
+el número de usuarios, e incluso identificarlos, como para entregar una
+capacitación personalizada. Por ello es que se ha trabajado en una documentación
+en línea que permita a cualquier usuario utilizar el sistema, en sus diferentes
+modalidades. Esto se explica con mayor detalle en la sección \S\ref{sec:doc}.
 			\item [Soporte para los usuarios] De manera similar al punto anterior, se dificulta realizar esta actividad de manera personalizada, por lo que se habilita un correo electrónico\footnotemark{} para recibir las consultas, sugerencias y comentarios del sistema, y así poder tener un canal de comunicación con los usuarios con el objetivo de dar mejoras al sistema en pos de una mayor satisfacción de quienes utilicen el sistema.
 				\footnotetext{\url{mailto:info@chivo.cl}.}
 		\end{description}
-	\item [Preparaciones para la instalación] Antes que la herramienta sea instalada, se debe procurar que todo est\'e dispuesto y de manera correcta para que la instalación sea una proceso lo más limpio posible.
+	\item [Preparaciones para la instalación] Antes que la herramienta sea
+instalada, se debe procurar que todo est\'e dispuesto y de manera correcta para
+que la instalación sea una proceso lo más limpio posible.
 		\begin{description}
-			\item [Importación de los datos iniciales del cliente] Uno de las primeras actividades antes de la instalación, es la carga de datos provistos, en nuestro caso, por el mandante, ALMA. Durante largos meses se ha estado en contacto con personal de ALMA quienes nos han provisto de una cantidad importante de datos, los cuales han sido dispuestos en el ambiente de desarrollo y con ellos realizado las pruebas al sistema.
-			\item [Configuración del producto] Bajo las denominaciones del proyecto, existe un mandante, que en estricto rigor corresponde al cliente del proyecto. A comienzos del proyecto se levanto una lista de requerimientos con el cliente, los cuales han sido cumplidos cabalmente. Por otro lado, existe un listado de estándares (IVOA) sobre los cuales se basa el desarrollo de este proyecto, los cuales han sido seguidos al pie de la letra. Todo esto compone la configuración del producto, dado que su utilización puede ser realizada tanto en su versión web, como tambi\'en puede ser utilizado como un servicio mediante otras aplicaciones. Al seguir los estándares, la configuración para que ChiVO funcione bajo estas herramientas ya está realizado.
-			\item [Integración del producto] Similar a lo expuesto al punto anterior, la estandarización sobre la cual está desarrollado ChiVO, hace que su integración con otros observatorios virtuales y herramientas para operar sobre catálogos y tablas, tambi\'en se haya realizado exitosamente. Actualmente el observatorio virtual chileno puede ser utilizado con herramientas como \verb;TOPCAT;\footnote{\url{http://www.star.bris.ac.uk/~mbt/topcat/sun253/index.html}.}.
-			\item [Planificación de una fecha para el despliegue] A fines del año 2014 se ha realizado una planificación preliminar orientada a calzar con las fechas de entrega de hitos finales y cierre del proyecto. Es así como a comienzos de año 2015 se ha ratificado 2 fechas claves: 27 de marzo y 24 de abril. La primera corresponde a un lanzamiento interno de la aplicación, en donde los integrantes del proyecto presentarán el funcionamiento de la herramienta bajo sus diferentes perspectivas. De este lanzamiento podrán surgir interrogantes y detalles a mejorar para la segunda fecha, donde \emph{the Chilean Virtual Observatory} será desplegado y lanzado para su utilización. 
-			\item [Crear un paquete de despliegue] El proyecto ha contado desde sus inicios con un administrador de sistemas, quien es el encargado de toda la infraestructura tanto física como en la nube del proyecto. Una de sus labores ha sido desde siempre automatizar las instalaciones de los diferentes paquetes de software utilizados para el desarrollo y despliegue de ChiVO, documentando su uso y los pasos que no pueden ser automatizados. Es así como en la actualidad se encuentra automatizada gran parte de la instalación de ChiVO. Cabe destacar que esta herramienta se instala sólo a nivel de servidor, por lo que no acarrea gran problema aquellos pasos no automatizados. Los clientes sólo requieren de un navegador web para utilizar la herramienta, u otras herramientas que quizá deban ser instaladas a nivel de cliente, lo cual depende exclusivamente del proveedor de esa herramienta y el usuario.
+			\item [Importación de los datos iniciales del cliente] Uno de las
+primeras actividades antes de la instalación, es la carga de datos provistos, en
+nuestro caso, por el mandante, ALMA. Durante largos meses se ha estado en
+contacto con personal de ALMA quienes nos han provisto de una cantidad
+importante de datos, los cuales han sido dispuestos en el ambiente de desarrollo
+y con ellos realizado las pruebas al sistema.
+			\item [Configuración del producto] Bajo las denominaciones del
+proyecto, existe un mandante, que en estricto rigor corresponde al cliente del
+proyecto. A comienzos del proyecto se levanto una lista de requerimientos con el
+cliente, los cuales han sido cumplidos cabalmente. Por otro lado, existe un
+listado de estándares (IVOA) sobre los cuales se basa el desarrollo de este
+proyecto, los cuales han sido seguidos al pie de la letra. Todo esto compone la
+configuración del producto, dado que su utilización puede ser realizada tanto en
+su versión web, como tambi\'en puede ser utilizado como un servicio mediante
+otras aplicaciones. Al seguir los estándares, la configuración para que ChiVO
+funcione bajo estas herramientas ya está realizado.
+			\item [Integración del producto] Similar a lo expuesto al punto
+anterior, la estandarización sobre la cual está desarrollado ChiVO, hace que su
+integración con otros observatorios virtuales y herramientas para operar sobre
+catálogos y tablas, tambi\'en se haya realizado exitosamente. Actualmente el
+observatorio virtual chileno puede ser utilizado con herramientas como
+\verb;TOPCAT;\footnote{\url{http://www.star.bris.ac.uk/~mbt/topcat/sun253/index.html}.}.
+			\item [Planificación de una fecha para el despliegue] A fines del año
+2014 se ha realizado una planificación preliminar orientada a calzar con las
+fechas de entrega de hitos finales y cierre del proyecto. Es así como a
+comienzos de año 2015 se ha ratificado 2 fechas claves: 27 de marzo y 24 de
+abril. La primera corresponde a un lanzamiento interno de la aplicación, en
+donde los integrantes del proyecto presentarán el funcionamiento de la
+herramienta bajo sus diferentes perspectivas. De este lanzamiento podrán surgir
+interrogantes y detalles a mejorar para la segunda fecha, donde \emph{the
+Chilean Virtual Observatory} será desplegado y lanzado para su utilización. 
+			\item [Crear un paquete de despliegue] El proyecto ha contado desde sus
+inicios con un administrador de sistemas, quien es el encargado de toda la
+infraestructura tanto física como en la nube del proyecto. Una de sus labores ha
+sido desde siempre automatizar las instalaciones de los diferentes paquetes de
+software utilizados para el desarrollo y despliegue de ChiVO, documentando su
+uso y los pasos que no pueden ser automatizados. Es así como en la actualidad se
+encuentra automatizada gran parte de la instalación de ChiVO. Cabe destacar que
+esta herramienta se instala sólo a nivel de servidor, por lo que no acarrea gran
+problema aquellos pasos no automatizados. Los clientes sólo requieren de un
+navegador web para utilizar la herramienta, u otras herramientas que quizá deban
+ser instaladas a nivel de cliente, lo cual depende exclusivamente del proveedor
+de esa herramienta y el usuario.
 		\end{description}
 	\item [Instalación] En este apartado se describe las actividades necesarias para realizar la instalación de la herramienta.
 		\begin{description}
