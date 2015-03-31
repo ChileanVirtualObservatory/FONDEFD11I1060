@@ -100,11 +100,11 @@ Posteriormente, se debe considerar lo siguiente:
 			\item \verb;enableTests;: paginas de prueba. Valores: \verb;True;, \verb;False;. Valor por defecto es \verb;false;.
 			\item \verb;favicon;: dirección al \verb;favicon;, según \verb;webDir;.
 			\item \verb;graphicMimes;: \emph{MIME types} considerados como gráficos. Valor por defecto: \verb;image/fits,image/jpeg;.
-			\item \verb;maxPreviewWidth;: límite de ancho de las previsualizaciones, Valor por defecto: 300.
+			\item \verb;maxPreviewWidth;: límite de ancho de las vistas previas, Valor por defecto: 300.
 			\item \verb;maxUploadSize;: tamaño máximo de archivos subidos. Valor por defecto: 20000000.
 			\item \verb;nevowRoot;: dirección de la raíz del servidor. Valor por defecto: \verb;/;.
 			\item \verb;preloadRDs;: lista de RD\footnote{Resource Descriptor.} que se pre cargan al iniciar el servidor. Es una lista de \emph{strings} y su valor por defecto es: \verb;'';.
-			\item \verb;previewCache;: dirección relativa a \verb;webDir;, para almacenar \emph{cache} de la previsualización. Valor por defecto: \verb;previewcache;.
+			\item \verb;previewCache;: dirección relativa a \verb;webDir;, para almacenar \emph{cache} de la vista previa. Valor por defecto: \verb;previewcache;.
 			\item \verb;realm;: autenticación de dominio. Valor por defecto: \verb;X.Unconfigured;.
 			\item \verb;serverPort;: puerto del servidor. Valor por defecto: 8080.
 			\item \verb;serverURL;: URL relativa cuando es necesario. Valor por defecto: \url{http://localhost:8080}.
@@ -329,7 +329,7 @@ Para utilizar los servicios de Simple Cone Search (SCS) de manera simplificada, 
 Algunas consideraciones:
 
 \begin{itemize}
-	\item Nótese que, en \verb;queriedTable=``TABLE_NAME'';, debe ir el mismo nombre de la tabla creado en este ejemplo como \verb;NOMBRE_TABLA;.
+	\item Note que, en \verb;queriedTable=``TABLE_NAME'';, debe ir el mismo nombre de la tabla creado en este ejemplo como \verb;NOMBRE_TABLA;.
 	\item Para poder acceder a los métodos de acceso, debemos elegir \verb;sets=local;, \verb;ivo_managed; los registra en el VO.
 	\item Es necesario tener dos columnas con los UCD como index: \verb:pos.eq.ra;meta.main: y \verb:pos.eq.dec;meta.main:.
 \end{itemize}
