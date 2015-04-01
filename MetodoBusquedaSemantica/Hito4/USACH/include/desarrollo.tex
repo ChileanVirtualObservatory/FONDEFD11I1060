@@ -1,5 +1,179 @@
 \section{Detalles de Implementación y Pruebas}
 
+En este punto la teoría y la implementación de los diferentes algoritmos se
+pasan por diversas pruebas, que medirán su fidelidad, consistencia y
+efectividad, para
+que así astrónomos o investigadores, con toda confianza puedan explotar la
+información
+que tienen, automatizando las acciones y optimizando el tiempo dedicado al
+análisis.
+Las pruebas son llevadas a cabo en una computadora portátil marca Apple,
+modelo Macbook Air, la cual cuenta con un procesador de 1.6 Ghz Intel Core i5,
+Memoria DDR3 de 2 GB y 1333 MHz, Gráficos Intel HD Gráficos 3000 288 MB y
+sistema operativo Maverick versión 10.9.3.
+En primera instancia se prueban uno a uno los módulos testeando si realizan
+correctamente lo esperado y a su vez los tiempos de respuesta. En cada etapa del
+registro
+se ingresan diferentes parámetros de entrada y su consistencia en ellos. Los
+módulos
+están separados en dos tipos: Módulos superiores, que corresponden a todos
+aquellos
+que son protagonistas en las etapas del registro y módulos inferiores que
+realizan tareas
+de cálculo que colaboran con los módulos superiores.
+
+\subsection{Módulos Superiores}
+
+En esta etapa se probarán los módulos por separado, midiendo su
+efectividad, consistencia de la información y el tiempo de procesamiento para
+diferentes
+cantidades de imágenes. Se irán mostrando tablas comparativas en cada tipo de
+algoritmo y los resultados visuales obtenidos. Para poder visualizar los
+resultados de
+cada imagen, se ha utilizado DS9, software que permite entre muchas cosas ver
+una
+imagen. La imagen de a continuación corresponde a la Galaxia Lenticular NGC
+5128, la
+cual fue capturada por el Telescopio Schmidt del Reino Unido, tiene dos
+dimensiones
+las cuales son de 1095 x 1095, esta será utilizada para las diferentes pruebas
+llevadas a
+cabo.
+
+\subsubsection{Recortar}
+Módulo que tiene como entrada un vector de coordenadas (x,y), las cuales
+representan el borde del objeto elíptico y la matriz de información de la imagen
+que contiene el objeto. El sistema recorre punto a punto determinando el mayor y
+menor valor en ‘x’ y en ‘y’, los cuales definen el límite de la zona en donde se
+encuentra el objeto. Las imágenes de a continuación, figura 4-2, 4-3 y 4-4,
+representan una imagen de forma matricial la cual posee un objeto elíptico.
+
+
+La tabla de a continuación detalla la salida obtenida al ingresar las matrices
+anteriormente mas el vector de coordenadas.
+
+El tiempo de procesamiento es bastante rápido en general, si en una matriz de
+10x10
+tarda en promedio 0.00014456 segundos, comportamiento casi constante, en una
+matriz
+de 2000 x 2000, siguiendo el mismo comportamiento lineal se puede estimar que no
+tardaría mas de 1 segundo en hacer una extracción.
+Las imágenes de a continuación, figura 4-4, 4-5 y 4-6 representan la matriz de
+entrada
+ingresada al sistema y su respectiva salida.
+
+\subsubsection{Rotación}
+
+Modulo que tiene como entrada la matriz que se desea rotar, su dimensión, y el
+ángulo en el cual será rotada. El módulo retorna la matriz rotada en el ángulo
+respectivo en sentido antihorario.
+
+Mirando la table se puede apreciar, que el tiempo de computo en procesar una
+rotación de 90o es mas rápido que los otros ángulo, un 12 segundos contra 15 que
+tarda una rotación en 5o, esto se puede entender dado que cuando la matriz es
+rotada en 90o*n, con n pertenecientes a los cardinales, las coordenadas rotadas
+siempre caerán en valores enteros, por lo que no será necesario interpolar la
+información. Independiente de eso, en interpolar solo se invierte 3 segundos. No
+siempre será necesario rotar la imagen, por lo que se puede decir, que rotando
+una muestra de 100, el astrónomo invertirá aproximadamente 1225 segundos si
+el programa no necesita interpolar.
+A continuación se muestran los resultados visuales para una rotación de 5, 45,
+73
+y 128 grados. Ver figura 4-8, 4-9, 4-10 y 4-11.
+
+\subsubsection{Escalar}
+Modulo que tiene como entrada la matriz que se desea rotar, su dimensión, y la
+razón en que será escalada. Para notar la diferencia se mostrará la imagen
+escalada con y sin interpolación. Cuando termina la ejecución, el módulo retorna
+la matriz escalada.
+
+Observando la tabla se puede apreciar la diferencia tajante de cuando una imagen
+es ampliada o no, por ejemplo, cuando se amplía en una razón de dos se
+requieren casi 25 segundo para que se lleve a cabo, en cambio cuando la imagen
+se achica en una razón de 1\/4, tan solo se necesitan 12.75 segundos, esta
+diferencia surge dado que no es necesario crear información intermedia entre
+puntos. A medida que crece la taza de ampliación, es mas costoso el tiempo de
+procesamiento. La imagen de a continuación representa una ampliación para una
+razón de 2 sin interpolar, en ella se puede apreciar como los puntos al
+distribuirlos quedan sin información entre ellos.
+
+Si viéramos esta misma imagen mas de cerca, apreciaríamos que los puntos están
+uniformemente distribuidos, y a dos puntos de distancia, figura 4-13, hay un
+nuevo punto con información. Si la razón fuera 5, figura 4-14, los puntos
+estarían
+aún mas disperso.
+
+Cuando la imagen se agranda el algoritmo entra en una segunda fase, que
+consiste en completar la información vacía, la cual es la parte más costosa del
+algoritmo,
+ya que se invierte mínimo el 92\% del tiempo, con una tendencia creciente muy
+marcada.
+
+La tabla 4.3 muestra como influye en el tiempo de respuesta la interpolación. El
+tiempo
+sin interpolar es insignificante y casi invariante el tiempo de escalar.
+
+Acontinuación, figura 4-15, se puede apreciar el resultado de la imagen escalada
+e
+interpolada.
+
+\subsubsection{Alinear}
+El módulo alinear tiene como entrada la coordenada del punto central del objeto
+en la imagen de referencia, del objeto de la imagen actual, la dimensión de la
+imagen de de referencia y de la imagen actual, y la matriz de información de la
+imagen actual. Este módulo retorna una matriz de tamaño igual a la de
+referencia, con el objeto de la imagen actual centrado en el mismo punto que el
+objeto de referencia. Este proceso no requiere de mucho tiempo de ejecución ya
+que básicamente es trasladar puntos.
+
+\subsubsection{Deproyectar}
+El siguiente módulo tiene como entrada el punto (x,y) donde se llevará el centro
+del objeto actual, la dimensión de la imagen de referencia, las coordenadas del
+borde del objeto que se esta analizando, su matriz de información y el radio.
+
+El efecto logrado en la imagen no ha sido muy notorio, dado que el objeto ya
+poseía una forma circular. El tiempo de ejecución no es muy alto a pesar de la
+cantidad de puntos que se deben interpolar. La figura 4-10 muestra como una
+serie de puntos fueron trasladados una distancia igual al radio del objeto, en
+sentido parametrico de la circunferencia.
+
+\subsection{Módulos Inferiores}
+Esta etapa de pruebas consiste en validar el sistema de cómputo oculto dentro
+del
+sistema, que colabora colabora con los módulos superiores entregando información
+vital
+de los objetos en las variadas imágenes antes de realizar cualquier
+transformación
+geométrica en el plano.
+
+\subsubsection{Distancia entre puntos}
+
+Función que tiene como entrada dos coordenadas (X 1 ,Y 1 ) y (X 2 ,Y 2 ), de las
+cuales
+calcula su distancia lineal. Se prueban diferentes valores para ‘X’ e ‘Y’. Por
+cada
+resultado se tomará el tiempo de cálculo.
+La tabla 4.7, para las diferentes entradas de (X,Y) se muestra su distancia, y
+el
+tiempo en segundo que tarda en calcularla.
+
+\subsubsection{Medida del eje mayor}
+Algoritmo que a partir de un vector que se compone de todas las coordenadas
+que son parte del borde del objeto elíptico, determina cual es la mayor
+distancia
+entre ellas. El vector se recibe de la siguiente manera, tabla 4.8:
+
+A continuación probaremos tres objetos elípticos, figura 4-18, figura 4-19 y
+figura 4-20. La tabla
+
+\subsubsection{Ángulo a rotar}
+Función que recibe como parámetros de entrada las coordenadas del borde de la
+elipse, retornando el complemento del ángulo de la pendiente.
+
+\subsubsection{Centro geométrico}
+Función que recibe como parámetros de entrada el tamaño del eje mayor del
+objeto, sus coordenadas y la pendiente de la recta, entregando como salida, las
+coordenadas del centro del objeto.
 
 
 %\subsection{Definiciones básicas}
