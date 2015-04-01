@@ -1,179 +1,360 @@
 \section{Detalles de Implementación y Pruebas}
 
-En este punto la teoría y la implementación de los diferentes algoritmos se
-pasan por diversas pruebas, que medirán su fidelidad, consistencia y
-efectividad, para
-que así astrónomos o investigadores, con toda confianza puedan explotar la
-información
-que tienen, automatizando las acciones y optimizando el tiempo dedicado al
-análisis.
-Las pruebas son llevadas a cabo en una computadora portátil marca Apple,
-modelo Macbook Air, la cual cuenta con un procesador de 1.6 Ghz Intel Core i5,
-Memoria DDR3 de 2 GB y 1333 MHz, Gráficos Intel HD Gráficos 3000 288 MB y
-sistema operativo Maverick versión 10.9.3.
-En primera instancia se prueban uno a uno los módulos testeando si realizan
-correctamente lo esperado y a su vez los tiempos de respuesta. En cada etapa del
-registro
-se ingresan diferentes parámetros de entrada y su consistencia en ellos. Los
-módulos
-están separados en dos tipos: Módulos superiores, que corresponden a todos
-aquellos
-que son protagonistas en las etapas del registro y módulos inferiores que
-realizan tareas
-de cálculo que colaboran con los módulos superiores.
+En este punto la teoría y la implementación de los diferentes algoritmos se pasan por diversas pruebas, que medirán su fidelidad, consistencia y efectividad, para que así astrónomos o investigadores, con toda confianza puedan explotar la información que tienen, automatizando las acciones y optimizando el tiempo dedicado al análisis.  
+
+Las pruebas son llevadas a cabo en una computadora portátil marca Apple, modelo Macbook Air, la cual cuenta con un procesador de 1.6 Ghz Intel Core i5, Memoria DDR3 de 2 GB y 1333 MHz, Gráficos Intel HD Gráficos 3000 288 MB y sistema operativo Maverick versión 10.9.3.  
+
+En primera instancia se prueban uno a uno los módulos testeando si realizan correctamente lo esperado y a su vez los tiempos de respuesta. En cada etapa del registro se ingresan diferentes parámetros de entrada y su consistencia en ellos. Los módulos están separados en dos tipos: Módulos superiores, que corresponden a todos aquellos que son protagonistas en las etapas del registro y módulos inferiores que realizan tareas de cálculo que colaboran con los módulos superiores.  
 
 \subsection{Módulos Superiores}
 
-En esta etapa se probarán los módulos por separado, midiendo su
-efectividad, consistencia de la información y el tiempo de procesamiento para
-diferentes
-cantidades de imágenes. Se irán mostrando tablas comparativas en cada tipo de
-algoritmo y los resultados visuales obtenidos. Para poder visualizar los
-resultados de
-cada imagen, se ha utilizado DS9, software que permite entre muchas cosas ver
-una
-imagen. La imagen de a continuación corresponde a la Galaxia Lenticular NGC
-5128, la
-cual fue capturada por el Telescopio Schmidt del Reino Unido, tiene dos
-dimensiones
-las cuales son de 1095 x 1095, esta será utilizada para las diferentes pruebas
-llevadas a
-cabo.
+En esta etapa se probarán los módulos por separado, midiendo su efectividad, consistencia de la información y el tiempo de procesamiento para diferentes cantidades de imágenes. Se irán mostrando tablas comparativas en cada tipo de algoritmo y los resultados visuales obtenidos. Para poder visualizar los resultados de cada imagen, se ha utilizado DS9, software que permite entre muchas cosas ver una imagen. La Img.~\ref{img:ngc} corresponde a la Galaxia Lenticular NGC 5128, la cual fue capturada por el Telescopio Schmidt del Reino Unido, tiene dos dimensiones las cuales son de 1095 x 1095, esta será utilizada para las diferentes pruebas llevadas a cabo.
+
+\begin{figure}[ht!]
+	\begin{center}
+		\includegraphics[scale=.5]{img/ngc}
+	\end{center}
+	\caption{Imagen de prueba de la galaxia NGC 5128.}\label{img:ngc}
+\end{figure}
 
 \subsubsection{Recortar}
-Módulo que tiene como entrada un vector de coordenadas (x,y), las cuales
-representan el borde del objeto elíptico y la matriz de información de la imagen
-que contiene el objeto. El sistema recorre punto a punto determinando el mayor y
-menor valor en ‘x’ y en ‘y’, los cuales definen el límite de la zona en donde se
-encuentra el objeto. Las imágenes de a continuación, figura 4-2, 4-3 y 4-4,
-representan una imagen de forma matricial la cual posee un objeto elíptico.
 
+Módulo que tiene como entrada un vector de coordenadas (x,y), las cuales representan el borde del objeto elíptico y la matriz de información de la imagen que contiene el objeto. El sistema recorre punto a punto determinando el mayor y menor valor en ‘x’ y en ‘y’, los cuales definen el límite de la zona en donde se encuentra el objeto. Las Img.~\ref{img:elip1}, \ref{img:elip2} y \ref{img:elip3}, representan una imagen de forma matricial la cual posee un objeto elíptico.
 
-La tabla de a continuación detalla la salida obtenida al ingresar las matrices
-anteriormente mas el vector de coordenadas.
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/elip1}
+	\caption{Imagen de prueba con objeto elíptico (1).}\label{img:elip1}
+\end{figure}
 
-El tiempo de procesamiento es bastante rápido en general, si en una matriz de
-10x10
-tarda en promedio 0.00014456 segundos, comportamiento casi constante, en una
-matriz
-de 2000 x 2000, siguiendo el mismo comportamiento lineal se puede estimar que no
-tardaría mas de 1 segundo en hacer una extracción.
-Las imágenes de a continuación, figura 4-4, 4-5 y 4-6 representan la matriz de
-entrada
-ingresada al sistema y su respectiva salida.
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/elip2}
+	\caption{Imagen de prueba con objeto elíptico (2).}\label{img:elip2}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/elip3}
+	\caption{Imagen de prueba con objeto elíptico (3).}\label{img:elip3}
+\end{figure}
+
+La Tab.~\ref{tab:ri} detalla la salida obtenida al ingresar las matrices anteriormente mas el vector de coordenadas.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c|c|c}
+		Matriz de entrada & $x$ mayor & $x$ menor & $y$ mayor & $y$ menor & Tiempo (seg) \\\hline\hline
+		Fig.~\ref{img:elip1} & 8  & 1 & 7  & 1 & 0.0001530 \\\hline
+		Fig.~\ref{img:elip2} & 9  & 5 & 10 & 4 & 0.0001630 \\\hline
+		Fig.~\ref{img:elip3} & 10 & 0 & 6  & 4 & 0.0001177 \\
+	\end{tabular}
+	\caption{Recorte de una imagen.}
+	\label{tab:ri}
+\end{table}
+
+El tiempo de procesamiento es bastante rápido en general, si en una matriz de 10x10 tarda en promedio 0.00014456 segundos, comportamiento casi constante, en una matriz de 2000 x 2000, siguiendo el mismo comportamiento lineal se puede estimar que no tardaría mas de 1 segundo en hacer una extracción.
+
+Las Img.~\ref{img:eo1}, \ref{img:eo2} y \ref{img:eo3} representan la matriz de entrada ingresada al sistema y su respectiva salida.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/eo1}
+	\caption{Extracción de objeto (1).}\label{img:eo1}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/eo2}
+	\caption{Extracción de objeto (2).}\label{img:eo2}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/eo3}
+	\caption{Extracción de objeto (3).}\label{img:eo3}
+\end{figure}
+
 
 \subsubsection{Rotación}
 
-Modulo que tiene como entrada la matriz que se desea rotar, su dimensión, y el
-ángulo en el cual será rotada. El módulo retorna la matriz rotada en el ángulo
-respectivo en sentido antihorario.
+Modulo que tiene como entrada la matriz que se desea rotar, su dimensión, y el ángulo en el cual será rotada. El módulo retorna la matriz rotada en el ángulo respectivo en sentido antihorario.
 
-Mirando la table se puede apreciar, que el tiempo de computo en procesar una
-rotación de 90o es mas rápido que los otros ángulo, un 12 segundos contra 15 que
-tarda una rotación en 5o, esto se puede entender dado que cuando la matriz es
-rotada en 90o*n, con n pertenecientes a los cardinales, las coordenadas rotadas
-siempre caerán en valores enteros, por lo que no será necesario interpolar la
-información. Independiente de eso, en interpolar solo se invierte 3 segundos. No
-siempre será necesario rotar la imagen, por lo que se puede decir, que rotando
-una muestra de 100, el astrónomo invertirá aproximadamente 1225 segundos si
-el programa no necesita interpolar.
-A continuación se muestran los resultados visuales para una rotación de 5, 45,
-73
-y 128 grados. Ver figura 4-8, 4-9, 4-10 y 4-11.
+Mirando la Tab.~\ref{tab:pr} se puede apreciar, que el tiempo de computo en procesar una rotación de $90^\circ$ es mas rápido que los otros ángulo, un 12 segundos contra 15 que tarda una rotación en $5^\circ$, esto se puede entender dado que cuando la matriz es rotada en $90^\circ * n$, con $n$ pertenecientes a los cardinales, las coordenadas rotadas siempre caerán en valores enteros, por lo que no será necesario interpolar la información. Independiente de eso, en interpolar solo se invierte 3 segundos. No siempre será necesario rotar la imagen, por lo que se puede decir, que rotando una muestra de 100, el astrónomo invertirá aproximadamente 1225 segundos si el programa no necesita interpolar.
+
+\begin{table}
+	\centering
+	\begin{tabular}{p{1in}|p{1in}|p{1in}|p{1in}|p{1in}}
+		Número de iteraciones & Ángulo a rotar (grados) & Rota en el ángulo que se pide & Existe consistencia en el resultado & Tiempo de ejecución (seg) \\\hline\hline
+		1   & 5   & Sí & Sí & 15.4021849632 \\\hline
+		1   & 45  & Sí & Sí & 15.2303009033 \\\hline
+		1   & 73  & Sí & Sí & 15.9277729988 \\\hline
+		1   & 128 & Sí & Sí & 16.5094139576 \\\hline
+		5   & 90  & Sí & Sí & 61.0421690941 \\\hline
+		10  & 90  & Sí & Sí & 120.126850128 \\\hline
+		50  & 90  & Sí & Sí & 605.092447042 \\\hline
+		100 & 90  & Sí & Sí & 1225.95393801 \\
+	\end{tabular}
+	\caption{Pruebas de rotación para una imagen.}
+	\label{tab:pr}
+\end{table}
+
+A continuación se muestran los resultados visuales para una rotación de 5, 45, 73 y 128 grados. Ver Img.~\ref{img:rot5}, \ref{img:rot45}, \ref{img:rot73} y \ref{img:rot128}.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/rot5}
+	\caption{Rotación de una imagen en $5^\circ$.}
+	\label{img:rot5}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/rot45}
+	\caption{Rotación de una imagen en $45^\circ$.}
+	\label{img:rot45}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/rot73}
+	\caption{Rotación de una imagen en $73^\circ$.}
+	\label{img:rot73}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/rot128}
+	\caption{Rotación de una imagen en $128^\circ$.}
+	\label{img:rot128}
+\end{figure}
+
+
 
 \subsubsection{Escalar}
-Modulo que tiene como entrada la matriz que se desea rotar, su dimensión, y la
-razón en que será escalada. Para notar la diferencia se mostrará la imagen
-escalada con y sin interpolación. Cuando termina la ejecución, el módulo retorna
-la matriz escalada.
 
-Observando la tabla se puede apreciar la diferencia tajante de cuando una imagen
-es ampliada o no, por ejemplo, cuando se amplía en una razón de dos se
-requieren casi 25 segundo para que se lleve a cabo, en cambio cuando la imagen
-se achica en una razón de 1\/4, tan solo se necesitan 12.75 segundos, esta
-diferencia surge dado que no es necesario crear información intermedia entre
-puntos. A medida que crece la taza de ampliación, es mas costoso el tiempo de
-procesamiento. La imagen de a continuación representa una ampliación para una
-razón de 2 sin interpolar, en ella se puede apreciar como los puntos al
-distribuirlos quedan sin información entre ellos.
+Módulo que tiene como entrada la matriz que se desea rotar, su dimensión, y la razón en que será escalada. Para notar la diferencia se mostrará la imagen escalada con y sin interpolación. Cuando termina la ejecución, el módulo retorna la matriz escalada.
 
-Si viéramos esta misma imagen mas de cerca, apreciaríamos que los puntos están
-uniformemente distribuidos, y a dos puntos de distancia, figura 4-13, hay un
-nuevo punto con información. Si la razón fuera 5, figura 4-14, los puntos
-estarían
-aún mas disperso.
+Observando la Tab.~\ref{tab:pei} se puede apreciar la diferencia tajante de cuando una imagen es ampliada o no, por ejemplo, cuando se amplía en una razón de dos se requieren casi 25 segundo para que se lleve a cabo, en cambio cuando la imagen se achica en una razón de $1/4$, tan solo se necesitan 12.75 segundos, esta diferencia surge dado que no es necesario crear información intermedia entre puntos. A medida que crece la taza de ampliación, es mas costoso el tiempo de procesamiento. La Img.~\ref{img:esi} representa una ampliación para una razón de 2 sin interpolar, en ella se puede apreciar como los puntos al distribuirlos quedan sin información entre ellos.
 
-Cuando la imagen se agranda el algoritmo entra en una segunda fase, que
-consiste en completar la información vacía, la cual es la parte más costosa del
-algoritmo,
-ya que se invierte mínimo el 92\% del tiempo, con una tendencia creciente muy
-marcada.
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		Razón & Escalamiento $+ / - $ & Hay consistencia & Interpolación & Tiempo de ejecución \\\hline\hline
+		2             & + & Sí & Sí & 24.782819032 \\\hline
+		5             & + & Sí & Sí & 62.765192031 \\\hline
+		$\frac{1}{4}$ & - & Sí & No & 12.748407125 \\\hline
+		$\frac{1}{5}$ & - & Sí & No & 12.996289014 \\
+	\end{tabular}
+	\caption{Pruebas de escalamiento para una imagen.}
+	\label{tab:pei}
+\end{table}
 
-La tabla 4.3 muestra como influye en el tiempo de respuesta la interpolación. El
-tiempo
-sin interpolar es insignificante y casi invariante el tiempo de escalar.
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/esi}
+	\caption{Escalamiento de imagen sin interpolación}
+	\label{img:esi}
+\end{figure}
 
-Acontinuación, figura 4-15, se puede apreciar el resultado de la imagen escalada
-e
-interpolada.
+Si viéramos esta misma imagen mas de cerca, apreciaríamos que los puntos están uniformemente distribuidos, y a dos puntos de distancia, Img.~\ref{img:er2}, hay un nuevo punto con información. Si la razón fuera 5, Img.~\ref{img:er5}, los puntos estarían aún más disperso.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/er2}
+	\caption{Escalamiento a razón de dos.}
+	\label{img:er2}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/er5}
+	\caption{Escalamiento a razón de cinco.}
+	\label{img:er5}
+\end{figure}
+
+Cuando la imagen se agranda el algoritmo entra en una segunda fase, que consiste en completar la información vacía, la cual es la parte más costosa del algoritmo, ya que se invierte mínimo el 92\% del tiempo, con una tendencia creciente muy marcada.
+
+La Tab.~\ref{tab:ctcsi} muestra como influye en el tiempo de respuesta la interpolación. El tiempo sin interpolar es insignificante y casi invariante el tiempo de escalar.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c}
+		Razón & Interpolación & Tiempo de ejecución \\\hline\hline
+		2 & Sí & 24.782819032 \\\hline
+		2 & No & 2.1595578193 \\\hline
+		3 & Sí & 35.017352819 \\\hline
+		3 & No & 2.1890161037 \\\hline
+		5 & Sí & 62.765192031 \\\hline
+		5 & No & 2.3549020290 \\
+	\end{tabular}
+	\caption{Comparativa en tiempo de algoritmo con y sin interpolación.}
+	\label{tab:ctcsi}
+\end{table}
+
+A continuación, Fig.~\ref{img:irai}, se puede apreciar el resultado de la imagen escalada e interpolada.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/irai}
+	\caption{Imagen resultante al agrandar una imagen.}
+	\label{img:irai}
+\end{figure}
 
 \subsubsection{Alinear}
-El módulo alinear tiene como entrada la coordenada del punto central del objeto
-en la imagen de referencia, del objeto de la imagen actual, la dimensión de la
-imagen de de referencia y de la imagen actual, y la matriz de información de la
-imagen actual. Este módulo retorna una matriz de tamaño igual a la de
-referencia, con el objeto de la imagen actual centrado en el mismo punto que el
-objeto de referencia. Este proceso no requiere de mucho tiempo de ejecución ya
-que básicamente es trasladar puntos.
+
+El módulo alinear tiene como entrada la coordenada del punto central del objeto en la imagen de referencia, del objeto de la imagen actual, la dimensión de la imagen de de referencia y de la imagen actual, y la matriz de información de la imagen actual (Tab.~\ref{tab:aptc}). Este módulo retorna una matriz de tamaño igual a la de referencia, con el objeto de la imagen actual centrado en el mismo punto que el objeto de referencia (Fig.~\ref{img:ali100}). Este proceso no requiere de mucho tiempo de ejecución ya que básicamente es trasladar puntos.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c|c|c}
+		Referencia $(x_i, y_j)$ & Actual $(x_i, y_j)$ & Referencia $(x, y)$ & Actual $(x, y)$ & Tiempo de ejecución & Hay consistencia \\\hline\hline
+		$(100, 100)$ & $(499, 499)$ &  $(500,500)$ & $(1095, 1095)$ & 3.99397 & Sí \\
+	\end{tabular}
+	\caption{Alineación de un punto en torno a coordenada (100, 100).}
+	\label{tab:aptc}
+\end{table}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/ali100}
+	\caption{Alineación de un objeto en torno al punto (100,100).}
+	\label{img:ali100}
+\end{figure}
 
 \subsubsection{Deproyectar}
-El siguiente módulo tiene como entrada el punto (x,y) donde se llevará el centro
-del objeto actual, la dimensión de la imagen de referencia, las coordenadas del
-borde del objeto que se esta analizando, su matriz de información y el radio.
 
-El efecto logrado en la imagen no ha sido muy notorio, dado que el objeto ya
-poseía una forma circular. El tiempo de ejecución no es muy alto a pesar de la
-cantidad de puntos que se deben interpolar. La figura 4-10 muestra como una
-serie de puntos fueron trasladados una distancia igual al radio del objeto, en
-sentido parametrico de la circunferencia.
+El siguiente módulo tiene como entrada el punto $(x,y)$ donde se llevará el centro del objeto actual, la dimensión de la imagen de referencia, las coordenadas del borde del objeto que se esta analizando, su matriz de información y el radio.
+
+El efecto logrado en la imagen no ha sido muy notorio, dado que el objeto ya poseía una forma circular. El tiempo de ejecución (Tab.~\ref{tab:tpoDepro}) no es muy alto a pesar de la cantidad de puntos que se deben interpolar. La Img.~\ref{img:depro} muestra como una serie de puntos fueron trasladados una distancia igual al radio del objeto, en sentido param\'etrico de la circunferencia.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c}
+		Radio & Coordenada elipse & Coordenada circunferencia & Tiempo de ejecución \\\hline\hline
+		250 & (7, 4) & (43,246) & 27.782819032 \\
+	\end{tabular}
+	\caption{Tiempo para la deproyección de un objeto.}
+	\label{tab:tpoDepro}
+\end{table}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=1]{img/depro}
+	\caption{Deproyección de un objeto}
+	\label{img:depro}
+\end{figure}
 
 \subsection{Módulos Inferiores}
-Esta etapa de pruebas consiste en validar el sistema de cómputo oculto dentro
-del
-sistema, que colabora colabora con los módulos superiores entregando información
-vital
-de los objetos en las variadas imágenes antes de realizar cualquier
-transformación
-geométrica en el plano.
+
+Esta etapa de pruebas consiste en validar el sistema de cómputo oculto dentro del sistema, que colabora colabora con los módulos superiores entregando información vital de los objetos en las variadas imágenes antes de realizar cualquier transformación geométrica en el plano.
 
 \subsubsection{Distancia entre puntos}
 
-Función que tiene como entrada dos coordenadas (X 1 ,Y 1 ) y (X 2 ,Y 2 ), de las
-cuales
-calcula su distancia lineal. Se prueban diferentes valores para ‘X’ e ‘Y’. Por
-cada
-resultado se tomará el tiempo de cálculo.
-La tabla 4.7, para las diferentes entradas de (X,Y) se muestra su distancia, y
-el
-tiempo en segundo que tarda en calcularla.
+Función que tiene como entrada dos coordenadas $(X_1 ,Y_1)$ y $(X_2 ,Y_2)$, de las cuales calcula su distancia lineal. Se prueban diferentes valores para $X$ e $Y$. Por cada resultado se tomará el tiempo de cálculo.
+
+La Tab.\ref{tab:mde2p}, para las diferentes entradas de $(X,Y)$ se muestra su distancia, y el tiempo en segundo que tarda en calcularla.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c|c|c}
+		$X_1$ & $Y_1$ & $X_2$ & $Y_2$ & Distancia & Tiempo (seg) \\\hline\hline
+		2     & 1     & 3     & 2     & 1.41421356237  & 2.78949737549 \\\hline
+		3     & 4     & 5     & 4.3   & 2.02237484162  & 5.00679016113 \\\hline
+		6.7   & 8     & 7     & 6     & 2.02237484162  & 4.05311584473 \\\hline
+		21.9  & 22    & 9     & 8     & 19.0370691021  & 3.81469726562 \\\hline
+		23.23 & 1     & 0     & 7     & 23.9923508644  & 3.09944152832 \\\hline
+		4.4   & 4.4   & 20.20 & 20.20 & 22.3445742855  & 3.09944152832 \\\hline
+		12    & 3     & 1     & 5     & 11.1803398875  & 3.09944152832 \\\hline
+		6     & 9     & 1     & 3     & 7.81024967591  & 2.86102294922 \\\hline
+		23.12 & 23.12 & 23.50 & 23.50 & 0.537401153702 & 3.09944152832 \\\hline
+		10    & 30    & 10    & 60    & 30.0           & 1.90734863281 \\
+	\end{tabular}
+	\caption{Medida de la distancia entre dos puntos.}
+	\label{tab:mde2p}
+\end{table}
 
 \subsubsection{Medida del eje mayor}
-Algoritmo que a partir de un vector que se compone de todas las coordenadas
-que son parte del borde del objeto elíptico, determina cual es la mayor
-distancia
-entre ellas. El vector se recibe de la siguiente manera, tabla 4.8:
 
-A continuación probaremos tres objetos elípticos, figura 4-18, figura 4-19 y
-figura 4-20. La tabla
+Algoritmo que a partir de un vector que se compone de todas las coordenadas que son parte del borde del objeto elíptico, determina cual es la mayor distancia entre ellas. El vector se recibe de la siguiente manera, Tab.~\ref{tab:evp}:
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
+		$X_1$ & $Y_1$ & $X_2$ & $Y_2$ & $X_3$ & $Y_3$ & \ldots & \ldots & $X_n$ & $Y_n$ \\\hline
+	\end{tabular}
+	\caption{Ejemplo de vector de puntos.}
+	\label{tab:evp}
+\end{table}
+
+A continuación probaremos tres objetos elípticos, Img.~\ref{img:ipoe1}, \ref{img:ipoe2} y \ref{img:ipoe3}. La Tab.~\ref{tab:bem} muestra la búsqueda del eje mayor.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/ipoe1}
+	\caption{Imagen de prueba con objeto elíptico (1).}
+	\label{img:ipoe1}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/ipoe2}
+	\caption{Imagen de prueba con objeto elíptico (2).}
+	\label{img:ipoe2}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=.5]{img/ipoe3}
+	\caption{Imagen de prueba con objeto elíptico (3).}
+	\label{img:ipoe3}
+\end{figure}
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		Vector de entrada & Coordenada menor & Coordenada mayor & Distancia & Tiempo (seg) \\\hline\hline
+		Img.~\ref{img:ipoe1} & (1,7) & (8,1)  & 9.21954445729 & 0.00046181678772 \\\hline
+		Img.~\ref{img:ipoe2} & (6,1) & (8,4)  & 6.32455532034 & 0.000265121459961 \\\hline
+		Img.~\ref{img:ipoe3} & (0,5) & (10,5) & 10.0          & 0.000530958175659 \\
+	\end{tabular}
+	\caption{Búsqueda del eje mayor}
+	\label{tab:bem}
+\end{table}
+
 
 \subsubsection{Ángulo a rotar}
-Función que recibe como parámetros de entrada las coordenadas del borde de la
-elipse, retornando el complemento del ángulo de la pendiente.
+
+Función que recibe como parámetros de entrada las coordenadas del borde de la elipse, retornando el complemento del ángulo de la pendiente (Tab.~\ref{tab:ar}).
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		Figura de referencia & Coordenada menor & Coordenada mayor & Ángulo complementario & Tiempo (seg) \\\hline\hline
+		Img.~\ref{img:ipoe1} & (1,7) & (8,1)  & 139.398705355 & 0.00004100799 \\\hline
+		Img.~\ref{img:ipoe2} & (6,1) & (8,4)  & 123.690067526 & 0.00003790851 \\\hline
+		Img.~\ref{img:ipoe3} & (0,5) & (10,5) & 90            & 0.00001096725 \\
+	\end{tabular}
+	\caption{Determinación del ángulo complementario}
+	\label{tab:ar}
+\end{table}
+
 
 \subsubsection{Centro geométrico}
-Función que recibe como parámetros de entrada el tamaño del eje mayor del
-objeto, sus coordenadas y la pendiente de la recta, entregando como salida, las
-coordenadas del centro del objeto.
+
+Función que recibe como parámetros de entrada el tamaño del eje mayor del objeto, sus coordenadas y la pendiente de la recta, entregando como salida, las coordenadas del centro del objeto (Tab.\ref{tab:ocg}).
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{p{.6in}|p{.7in}|p{.7in}|c|c|p{.7in}|c}
+		Figura de referencia & Coordenada menor & Coordenada mayor & Tamaño del eje & Pendiente & Centro geom\'etrico & Tiempo (seg) \\\hline\hline
+		Img.~\ref{img:ipoe1} & (1,7) & (8,1)  & 9.21954445729 & 40.601294645 & (4,10) & 0.000431537628 \\\hline
+		Img.~\ref{img:ipoe2} & (6,1) & (8,4)  & 6.32455532034 & 56.300032474 & (8,4)  & 7.009506225593 \\\hline
+		Img.~\ref{img:ipoe3} & (0,5) & (10,5) & 10.0          & 90           & (5,5)  & 0.00000500679  \\
+	\end{tabular}
+	\caption{}
+	\label{tab:ocg}
+\end{table}
 
 
 %\subsection{Definiciones básicas}
