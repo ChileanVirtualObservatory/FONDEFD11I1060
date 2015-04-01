@@ -1,0 +1,27 @@
+\section{Resumen Ejecutivo}
+
+El registro de imágenes consiste en ajustar geométricamente un
+conjunto de ellas, a partir de una imagen tomada como referencia, de
+modo que al procesarlas coincidan espacialmente en un plano.
+
+Atacama Large Milimetric/Submilimetric Array, esta generando actualmente un gran
+volumen de datos, los cuales necesitan ser analizados mediante algoritmos
+eficientes.
+El presente documento aborda el registro de imágenes aplicándolo a las ciencias
+astronómicas en su etapa de implementación y pruebas sobre galaxias que posean 
+puntualmente forma elíptica.
+
+La solución propuesta fue desarrollar un módulo en Python (Rogan \&
+Muñoz, 2012), utilizando matrices y transformaciones geométricas en el
+plano que normalicen imágenes en dos dimensiones, descritas en hitos anteriores. 
+Para poder abrir, operar y escribir sobre cada archivo, se utilizará el módulo Astropy
+(Astropy) y para operaciones matemáticas generales el módulo math
+(Python). De esta manera realizar un ajuste de ellas en relación a su
+posición, tamaño, rotación y deproyección en un plano de dos
+dimensiones, generando una colección de imágenes a analizar.
+
+Para finalizar, y correspondiente a la mayor parte de este último hito, 
+se realizan una serie de pruebas que miden la eficiencia,
+consistencia y el rendimiento del sistema generado.
+
+
