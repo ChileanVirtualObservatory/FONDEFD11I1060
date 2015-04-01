@@ -20,8 +20,22 @@ Para poder abrir, operar y escribir sobre cada archivo, se utilizará el módulo
 posición, tamaño, rotación y deproyección en un plano de dos
 dimensiones, generando una colección de imágenes a analizar.
 
-Para finalizar, y correspondiente a la mayor parte de este último hito, 
-se realizan una serie de pruebas que miden la eficiencia,
-consistencia y el rendimiento del sistema generado.
+Cabe destacar que en el hito anterior se presentó el algorito de registro de imágenes, por lo cual en este no se presenta mayores detalles sobre ello. Este informe está centrado específicamente en las pruebas realizadas al algoritmo, las cuales fueron realizadas módulo a módulo por separado. Se presenta entonces tablas comparativas por cada módulo, mostando diferentes resultados. Algunas consideraciones por módulo son las siguientes:
+
+\begin{description}
+	\item[Módulo de recorte] No más de 1 segundo para una matriz de $2000 \times 2000$.
+	\item[Módulo de rotación] Rotar en $90^\circ$ siempre es más rápido que rotar en otros ángulos.
+	\item[Módulo de escalar] Como era de esperarse, achicar la imagen demora mucho menos que agrandarla. Lo primero tiende a demorarse tiempos similares ante diferentes tasas, mientras que lo segundo aumenta considerablemente al aumentar la escala.
+	\item[Módulo de alinear] Operación sencilla que no requiere mucho tiempo de ejecución.
+	\item[Módulo de deproyectar] Dada la cantidad de puntos a interpolar, el tiempo de ejecución no es alto.
+	\item[Distancia entre puntos] El tiempo de ejecución para calcular la distancia entre 2 puntos no está directamente relacionado con la misma distancia.
+	\item[Medida del eje mayor] Tiempos significativamente menores.
+	\item[Ángulo a rotar] Tiempos muy menores, no existe relación con el ángulo retornado.
+	\item[Centro geom\'etrico] Tiempos bajo los 10 segundos.
+\end{description}
+
+%Para finalizar, y correspondiente a la mayor parte de este último hito, 
+%se realizan una serie de pruebas que miden la eficiencia,
+%consistencia y el rendimiento del sistema generado.
 
 
