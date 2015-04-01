@@ -1,0 +1,34 @@
+\documentclass[10pt]{article}
+
+\input{include/preambulo}
+
+\begin{document}
+\include{include/portada}
+\include{include/resumenEjecutivo}
+
+\renewcommand{\listfigurename}{Índice de imágenes}
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\figurename}{Imagen}
+\renewcommand{\tablename}{Tabla}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+%\include{include/metodologia}
+%\include{include/problema}
+%\include{include/sota}
+\include{include/desarrollo}
+\include{include/conclusiones}
+
+%\appendix
+%\include{include/virtualizacion}
+%\include{include/dachs}
+%\include{include/flask}
+%\include{include/ror}
+
+\include{include/bibliografia}
+
+\end{document}
