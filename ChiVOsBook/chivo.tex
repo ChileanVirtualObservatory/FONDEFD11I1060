@@ -1,0 +1,45 @@
+\documentclass[openany]{book}
+
+\input{include/preambulo}
+
+\begin{document}
+\include{include/portada}
+\frontmatter
+\pagestyle{fancy}
+\include{include/copyright}
+\include{include/agradecimientos}
+\renewcommand{\listfigurename}{Índice de imágenes}
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\figurename}{Imagen}
+\renewcommand{\tablename}{Tabla}
+\addcontentsline{toc}{chapter}{Índice general}
+\tableofcontents
+\listoftables
+\addcontentsline{toc}{chapter}{Índice de tablas}
+\listoffigures
+\addcontentsline{toc}{chapter}{Índice de imágenes}
+\include{include/prefacio}
+\include{include/colaboradores}
+\include{include/introduccion}
+
+\mainmatter
+\part{Observatorio virtual}
+\include{include/ov}
+
+\include{include/frontend}
+\include{include/endpoint}
+\include{include/backend}
+\include{include/pruebas}
+
+\part{M\'etodos de búsqueda semántica}
+\include{include/bs}
+
+\part{M\'etodos de minería de datos}
+\include{include/md}
+
+\backmatter
+\include{include/indice}
+\include{include/bibliografia}
+
+
+\end{document}
