@@ -1,1 +1,67 @@
-El observatorio virtual\ldots
+Desde el año 2002, proyectos de Observatorios Virtuales (VO’s, por sus siglas en ingl\'es) comenzaron a integrar la Alianza Internacional de Observatorios Virtuales bajo el \emph{Guidelines for Participation}\footnotemark{}.
+
+\footnotetext{La documentación se puede encontrar en \url{http://www.ivoa.net/documents/latest/IVOAParticipation.html}.}
+
+Esos proyectos fueron fundados bajo programas privados y gubernamentales nacionales e internacionales en colaboración con centros de estudios científicos, universidades y otros. Quienes integran este proyecto, el Observatorio Virtual, comparten conocimientos entre ellos y la comunidad de modo estandarizado, siendo ellos mismos quienes desarrollan estos estándares para el intercambio de información e interoperabilidad.
+
+La Tab.~\ref{tab:memivoa} muestra los miembros de IVOA hasta abril de 2015\footnotemark.
+
+\footnotetext{\url{http://www.ivoa.net/about/member-organizations.html}.}
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|p{2.3in}|p{2.5in}}
+		Proyecto & Nombre & Dirección \\\hline\hline
+		NOVA & Nuevo Observatorio Virtual Argentino & \url{http://nova.conicet.gov.ar/} \\\hline
+		ArVO & Armenian Virtual Observatory & \url{http://www.aras.am/Arvo/arvo.htm} \\\hline
+		AstroGrid & UK's Virtual Observatory & \url{http://www.astrogrid.org/} \\\hline
+		Aus-VO & Australian Virtual Observatory & \url{http://aus-vo.org.au/} \\\hline
+		BRAVO & Brazilian Virtual Observatory & \url{http://bravo.iag.usp.br/} \\\hline
+		CVO & Canadian Virtual Observatory & \url{http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/cvo/} \\\hline
+		ChiVO & Chilean Virtual Observatory & \url{http://www.chivo.cl/} \\\hline
+		China-VO & Chinese Virtual Observatory & \url{http://www.china-vo.org/} \\\hline
+		ESA-VO & European Space Agency Virtual Observatory & \url{http://www.sciops.esa.int/index.php?project=SAT\&page=ESAVOIntro} \\\hline
+		EURO-VO & European Virtual Observatory & \url{http://www.euro-vo.org/} \\\hline
+		GAVO & German Astrophysical Virtual Observatory & \url{http://www.g-vo.org/} \\\hline
+		HVO & Hungarian Virtual Observatory & \url{http://hvo.elte.hu/en/} \\\hline
+		JVO & Japanese Virtual Observatory & \url{http://jvo.nao.ac.jp/} \\\hline
+		OV-France & Observatoires Virtuels France & \url{http://www.france-vo.org/} \\\hline
+		RVO & Russian Virtual Observatory & \url{http://www.inasan.rssi.ru/eng/rvo/} \\\hline
+		SA\textsuperscript{3} & South African Astroinformatics Alliance & \url{http://www.sa3.ac.za/} \\\hline
+		SVO & Spanish Virtual Observatory & \url{http://svo.cab.inta-csic.es/main/index.php} \\\hline
+		VObs.it & Italian Virtual Observatory & \url{http://vobs.astro.it/} \\\hline
+		UKR VO & Ukrainian Virtual Observatory & \url{http://www.ukr-vo.org/} \\\hline
+		VAO & US Virtual Astronomical Observatory & \url{http://www.usvao.org/} \\\hline
+		VO-I & Virtual Observatory India & \url{http://vo.iucaa.ernet.in/~voi/} \\
+	\end{tabular}
+	\caption{Integrantes de IVOA.}
+	\label{tab:memivoa}
+\end{table}
+
+Con la incorporación de ChiVO a la lista de organizaciones miembro de IVOA, el continente americano se equipara en cantidad de VO's al continente asiático\footnotemark{}, siendo el europeo el que mantiene el liderato. La incorporación de Chile a este selecto grupo no hace más que consolidar la postura a nivel informático del país con mayor presencia de observatorios astronómicos a nivel mundial.
+
+\footnotetext{Esto es considerando a Armenia y Rusia como miembros asiáticos. Si se les considera como europeos, Am\'erica es el segundo continente con mayor cantidad de VO's.}
+
+Considerando todo lo anterior, al comienzo del proyecto se detalló un listado de requerimientos, los cuales se repasan a continuación:
+
+\begin{description}
+	\item[Buscar por coordenadas o región en el cielo] Se podrá realizar búsquedas de posición mediante coordenadas y radio angular (cónicas) o por	región del cielo. Los parámetros de las coordenadas pueden ser en distintos sistemas como ecuatorial, eclíptico, galáctico o supergaláctico. Los parámetros ingresados se convertirán al sistema de la fuente de datos, para así poder realizar las búsquedas, IVOA utiliza los sistemas de coordenadas ICRS y ecuatoriales J2000. En un principio, el sistema ofrecerá servicio de búsqueda por coordenadas cónicas y más adelante, en caso de ser vía un portal web, se ofrecerá búsqueda por región del cielo. El sistema tambi\'en deberá permitir buscar simultáneamente un listado de coordenadas.
+	\item[Buscar por nombre o tipo de objeto] El sistema deberá permitir buscar por nombres de objetos que se encuentren definidos en Sesame, del \emph{Centre de Donn\'ees astronomiques de Strasbourg} (CDS). Por otro lado, la búsqueda por tipo o subtipo de objeto, tales como estrellas en formación, estrellas nebulosas planetarias, supernovas, galaxias, cometas, entre otros, permitirá al usuario encontrar datos relacionados con una problemática en especial. En un principio, el sistema realizará estas búsquedas acorde a la información presente en los catálogos. A futuro, el sistema deberá permitir minería de datos para detección de tipos de objetos similares, esto es posible debido a que existen clasificaciones discretas que permiten clasificar los objetos que se encuentran en las observaciones. Este tipo de búsquedas, se transforman en búsquedas por coordenadas, ya que al buscar por un nombre, por ejemplo, Sesame responde con la correspondiente ubicación del objeto en coordenadas. Y luego de ello se procede a realizar la búsqueda por coordenadas correspondiente. El resultado de la búsqueda deberá facilitar la obtención de datos para ser analizados como secuencias de tiempo.
+	\item[Buscar por metadatos espectrales] Se podrá realizar búsquedas por metadatos espectrales, lo cual consiste en búsqueda por banda o	rango de frecuencia, búsquedas por líneas espectrales y corrimiento al rojo o búsquedas por resolución espectral. Específicamente, hay dos enfoques:
+		\begin{itemize}
+			\item Galáctico: Por frecuencia en reposo y velocidad radial.
+			\item Extragaláctico: Por frecuencia en reposo y corrimiento al rojo.
+		\end{itemize}
+		La frecuencia en reposo incluye búsquedas por mol\'ecula, transición de mol\'ecula (vibracional, rotacional o electrónica) o frecuencia de línea espectral.
+	\item[Buscar por metadatos espaciales] Se podrá realizar búsquedas espaciales en base a parámetros relacionados con rangos de resolución angular y campos de visión y siempre en base a coordenadas. Los parámetros de las coordenadas pueden ser en distintos sistemas como ecuatorial, eclíptico, galáctico o supergaláctico. Los parámetros ingresados se convertirán al sistema de la fuente de datos, para así poder realizar las búsquedas. Además, se podrá especificar parámetros relacionados con la forma de las observaciones (rectangulares o redondas).
+	\item[Buscar por metadatos temporales] Se podrá realizar búsquedas por metadatos temporales que pueden ser clasificadas en dos tipos de	búsquedas:
+		\begin{itemize}
+			\item Cuando fue realizada la observación, incluyendo cuantas veces se observó un objeto y/o el	intervalo entre observaciones.
+			\item Nivel de ruido, duración de la observación o tiempo de integración. Dado un ruido, se necesita un tiempo de integración que depende de la frecuencia observada y del clima.
+		\end{itemize}
+	\item[Buscar por polarización] Cada imagen se puede dividir en cuatro parámetros llamados los parámetros de Stokes o en dos: izquierda y derecha. En radio astronomía no suele hacerse debido a que requiere una alta precisión	del instrumento, en el caso de ALMA se requiere que est\'e lista la calibración. El sistema debe permitir buscar si existe o no polarización en alguno de los parámetros de Stokes: I, Q, U o V.
+	\item[Cruzamiento de información] La búsqueda cruzada debe permitir al usuario realizar las búsquedas mencionadas anteriormente	en múltiples fuentes de datos distribuidos globalmente, sin importar su tipo. Lo que permitirá obtener todos los datos existentes sobre un objeto o área espacial y así evitar realizar observaciones innecesarias debido al descubrimiento de observaciones existentes. Los tipos de fuentes pueden ser Sesame, ALMA u Observatorios Virtuales, que cumplan con los estándares de IVOA. La búsqueda de un mismo objeto en distintas fuentes de información, debido a que en cada fuente el instrumento tiene un margen de error en cuanto a la posición del objeto, debe ser capaz de realizar	una intersección entre los radios de margen de error de las distintas fuentes para identificar al objeto en una búsqueda cruzada.
+	\item[Simulaciones] Es a veces necesario realizar comparaciones con observaciones obtenidas a trav\'es de simulaciones,	así cómo es costoso realizar una observación dos veces, para una simulación puede ser aún más, debido a que dependiendo de la magnitud, hay simulaciones que requieren una gran capacidad de cómputo.
+	\item[Servicios Bibliográficos] Las herramientas existentes cumplen su función correctamente. Por ello, basta con que al buscar un objeto, se despliegue tambi\'en resultados de investigaciones que se hayan realizado al respecto con	un enlace a SIMBAD o similares.
+\end{description}
+
