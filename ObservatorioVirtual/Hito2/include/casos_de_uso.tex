@@ -1,0 +1,242 @@
+\section{Casos de Uso ChiVO}
+\noindent En la captura de requerimientos y casos de uso participaron los siguientes
+astrónomos:
+\begin{itemize}
+	\item Diego Mardones, Universidad de Chile.
+	\item Lars Nyman, Atacama Large Milimiter/submilimiter Array.
+	\item Neil Nagar, Universidad de Concepción.
+	\item Nelson Padilla, Pontificie Universidad Católica. 
+	\item Juan de Santander, Instituto de Astrofísica de Andalucía, España.
+	\item Amelia Bayo, European Southern Observatory.
+\end{itemize}
+
+\noindent El informe de requerimientos (Hito Anterior) se puede encontrar en
+\cite{hrequerimientos}.
+
+\noindent Para abordar de mejor forma los casos de uso, se mencionarán algunos
+conceptos relevantes:
+\begin{itemize}
+	\item Los datos astronómicos en sus diferentes formatos se dividen en:
+Metadata y Binarios. La metadata son datos que describen los datos de la
+observación, y los binarios son los datos obtenidos de la observación.
+	\item En la primera etapa el proyecto trabajará con archivos FITS.
+	\item Las búsquedas en el sistema se realizan sobre la metadata. El
+resultado de una búsqueda es un set de datos candidatos que coinciden con los
+parámetros fijados en la búsqueda.
+	\item La interacción final con el sistema es cuando el usuario decide qué
+datos necesita, los selecciona y los descarga de forma local.
+\end{itemize}
+
+\subsection{Casos de Uso Generales}
+Los siguientes casos de usos involucran de manera general a varios
+requerimientos, por lo que se presentan en una categoría especial. 
+
+\noindent\textbf{Caso de uso \#1}: \\
+\textbf{Objetivo}: Filtrar los resultados de la búsqueda en el Portal Web. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Alta. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: Ya que el usuario puede recibir una gran cantidad de
+resultados, éste debe ser capaz de realizar un filtro sobre alguna columna de
+los datos recibidos al realizar la búsqueda para así poder identificar los
+datos que se encuentre buscando. Este filtro puede ser realizado en el mismo
+navegador del usuario o a través de una nueva consulta. 
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#2}: \\
+\textbf{Objetivo}: Descargar datos desde el Portal Web. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Alta. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: Una vez que el usuario encuentre los datos que requiere, éste procede a descargarlos. Para ello el sistema provee un enlace directo a la fuente de los datos.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#3}: \\
+\textbf{Objetivo}: Visualizar una representación gráfica que compare los metadatos de los resultados de la búsqueda. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}:  Media. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: Una vez que el usuario reciba un conjunto de resultados, podrá visualizarlos en gráficos acordes al tipo de búsqueda y en base a los metadatos recibidos por la búsqueda.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#4}: \\
+\textbf{Objetivo}: Visualizar un producto o subproducto de los datos de la observación presente en los metadatos. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Alta. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: Visualización de la forma geométrica de las observaciones (rectangulares o redondas); cobertura UV; Calibración de paso de banda;Espectro observado;Imagen observada en un plano del producto cuando sea posible (podría ser parte de análisis en vez de observación);
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#5}: \\
+\textbf{Objetivo}: Análisis de cubo FITS. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Alta. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: Selecciona pixeles; proyección en una dimensión;flujo en un área;series de tiempo.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#6}: \\
+\textbf{Objetivo}: Análisis de ASDM. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Deseable. \\
+\textbf{Prioridad}: Media. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: Selecciona voxeles; proyección en una dimensión;flujo en un área;series de tiempo.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#7}: \\
+\textbf{Objetivo}: Los resultados de la búsqueda deben ser analizables para secuencias de tiempo. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Baja. \\
+\textbf{Requerimientos Referenciados}: del 1 al 7. \\
+\textbf{Descripción}: El usuario luego de realizar una búsqueda por tipo y/o subtipo de objeto, puede obtener los resultados de la búsqueda para ser analizados como secuencias de tiempo.
+\vspace{1.0cm}
+
+\subsection{Buscar por coordenada o región del cielo}
+\noindent\textbf{Caso de uso \#8}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda por coordenadas. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Alta. \\
+\textbf{Requerimientos Referenciados}: 1. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de coordenadas y radio angular o región de cielo y realiza una búsqueda. Los parámetros de coordenada pueden pertenecer al sistema ecuatorial (J2000 o B1950), eclíptico, galáctico o supergaláctico.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#9}: \\
+\textbf{Objetivo}: Realizar una búsqueda de listado de coordenadas. \\
+\textbf{Actor}: Usuario. \\
+\textbf{Necesidad}: Esencial. \\
+\textbf{Prioridad}: Alta. \\
+\textbf{Requerimientos Referenciados}: 1. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, ingresa una lista de coordenadas y radios angulares o regiones de cielo y realiza una búsqueda. Los parámetros de coordenada pueden pertenecer al sistema ecuatorial (J2000 o B1950), eclíptico, galáctico o supergaláctico. También el usuario puede subir un archivo con un formato establecido por el sitio con el listado de coordenadas.
+\vspace{1.0cm}
+
+\subsection{Buscar por nombre o tipo de objeto}
+\textbf{Caso de uso \#10}: \\
+\noindent\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda por nombre en base a Sesame. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 2. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena el campo de nombre según los nombres definidos en Sesame y realiza una búsqueda.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#11}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda por nombre en base a catálogo de un instrumento. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 2. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena el campo de nombre según los nombres definidos en Catálogos específicos de un instrumento y realiza una búsqueda.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#12}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda por tipo de objeto en un área del cielo. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 2. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de tipo y/o subtipos de objetos y un área del cielo y realiza una búsqueda.
+\vspace{1.0cm}
+
+\subsection{Buscar por metadatos espectrales}
+\noindent\textbf{Caso de uso \#13}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda espectral extragaláctica. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 3. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de banda o rango de frecuencia;  y/o líneas espectrales y corrimiento al rojo (z); y/o resolución espectral y/o ruido y realiza una búsqueda.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#14}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda espectral galáctica. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 3. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de banda o rango de frecuencia;  y/o líneas espectrales y velocidad radial (v\_r); y/o resolución espectral y/o ruido y realiza una búsqueda.  Línea espectral incluye campos de moléculas, transición de moléculas (vibracional, rotacional o electrónica) o frecuencia en reposo de la línea espectral.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#15}: \\
+\textbf{Objetivo}: Realizar una búsqueda de listado de frecuencias. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 3. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, ingresa una lista de frecuencias y realiza una búsqueda. También el usuario puede subir un archivo con un formato establecido por el sitio con el listado de frecuencias.
+\vspace{1.0cm}
+
+\subsection{Buscar por metadatos espaciales}
+\noindent\textbf{Caso de uso \#16}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda por resolución angular y/o campos de visión. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Media.\\
+\textbf{Requerimientos Referenciados}: 4. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de resolución angular y/o campos de visión y realiza una búsqueda.
+\vspace{1.0cm}
+
+\subsection{Buscar por metadatos temporales}
+\noindent\textbf{Caso de uso \#17}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda relacionada con cuando fue realizada la observación. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Deseable.\\
+\textbf{Prioridad}: Baja.\\
+\textbf{Requerimientos Referenciados}: 5. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de tiempo, cantidad de observaciones de un objeto y/o el intervalo entre las observaciones y realiza la búsqueda.
+\vspace{1.0cm}
+
+\noindent\textbf{Caso de uso \#18}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda relacionada con nivel de ruido, duración de la observación o tiempo de integración.\\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Alta.\\
+\textbf{Requerimientos Referenciados}: 5. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de nivel de ruido, duración de la observación o tiempo de integración y realiza una búsqueda.
+\vspace{1.0cm}
+
+\subsection{Buscar por polarización}
+\noindent\textbf{Caso de uso \#19}: \\
+\textbf{Objetivo}: Ingresar al Portal Web y realizar una búsqueda por parámetros de Stokes. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Baja.\\
+\textbf{Requerimientos Referenciados}: 6. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de parámetros de Stokes necesarios (I, Q, U y/o V) o de polarización izquierda o derecha y realiza la búsqueda.
+\vspace{1.0cm}
+
+\subsection{Cruzamiento de información}
+\noindent\textbf{Caso de uso \#20}: \\
+\textbf{Objetivo}: Buscar un objeto en múltiples fuentes de datos como archivos de los Satélites Spitzer y Herchel. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Esencial.\\
+\textbf{Prioridad}: Media.\\
+\textbf{Requerimientos Referenciados}: 7. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web, rellena los campos de nombre o código de objeto o coordenadas junto con un radio y se realiza la búsqueda. El sistema deberá realizar la búsqueda en base a ello en múltiples fuentes de información. Si se ingresa el nombre o código, se realiza una búsqueda teniendo en cuenta el margen error de cada fuente de datos.
+\vspace{1.0cm}
+
+\subsection{Simulaciones}
+\noindent\textbf{Caso de uso \#21}: \\
+\textbf{Objetivo}: Realiza una búsqueda de una simulación. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Deseable.\\
+\textbf{Prioridad}: Baja.\\
+\textbf{Requerimientos Referenciados}: 8. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web y realiza un búsqueda de una simulación.
+\vspace{1.0cm}
+
+\subsection{Servicios Bibliográficos}
+\noindent\textbf{Caso de uso \#22}: \\
+\textbf{Objetivo}: Rl realizar una búsqueda, desplegar en los resultados enlaces a información bibliográfica de SIMBAD. \\
+\textbf{Actor}: Usuario.\\
+\textbf{Necesidad}: Deseable.\\
+\textbf{Prioridad}: Media.\\
+\textbf{Requerimientos Referenciados}: 9. \\
+\textbf{Descripción}: El usuario ingresa al Portal Web y al desplegarse los resultados de una búsqueda, cada resultado contiene un enlace a una búsqueda con todos los datos contenidos en SIMBAD, ADS y/o NED pertenecientes al/los objeto/s.
