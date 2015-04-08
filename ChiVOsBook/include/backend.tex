@@ -1,3 +1,53 @@
 \chapter{Capa de datos}
 
-La capa de datos, o \emph{backend}\ldots
+\section{Estándares y protocolos IVOA}
+
+Lo primero que se realizó fue un estudio de los protocolos y estándares que debían ser considerados para el desarrollo del proyecto. A continuación se detalla cada uno de ellos:
+
+\begin{description}
+	\item[Observation Core Data Model (ObsCore)] Define los componentes principales de todos los metadatos accesibles que tienen un rol en el descubrimiento de las observaciones. Requerimientos: todos, debido a que es el modelo de datos base. \url{http://www.ivoa.net/documents/ObsCore/index.html}.
+	\item[Units] Define las prácticas comunes en la manipulación de unidades en los metadatos astronómicos y define una representación consistente en los servicios dentro de un VO. Necesario para: \emph{Observation Core Data Model}, \emph{Simple Spectral Line Data Model}, \emph{Characterisation Data Model}, \emph{Simulations Data Model}. \url{http://www.ivoa.net/documents/VOUnits/index.html}.
+	\item[UTypes:] Relacionado con \emph{units}, \emph{UTypes} son nombres que definen inequívocamente los elementos de los metadatos. Necesario para: \emph{Observation Core Data Model}, \emph{Simple Spectral Line Data Model}, \emph{Characterisation Data Model}, \emph{Simulations Data Model}. \url{http://www.ivoa.net/documents/Notes/UTypesUsage/index.html}.
+	\item[Simple Spectral Line Data Model] Describe las transiciones de líneas espectrales. Podría ser necesario, de otra manera, la información que puede estar contenida en el \emph{Observation Core Data Model.} Requerimientos: buscar por metadatos espectrales (frecuencia y resolución). \url{http://www.ivoa.net/documents/SSLDM/}.
+	\item[Characterisation Data Model] Define y organiza todos los metadatos necesarios para describir cómo un conjunto de datos ocupa un espacio físico multidimensional, cuantitativamente y, cuando es relevante, cualitativamente. Requerimientos: buscar por metadatos espectrales (frecuencia y resolución), buscar por metadatos espaciales (resolución angular y campos de visión). \url{http://www.ivoa.net/Documents/latest/ImplementationCharacterisation.html}.
+	\item[Space Time Coordinate Metadata] Describe metadatos espaciales y temporales. Podría ser necesario para usos específicos de tiempo-espacio. Requerimientos: buscar por coordenadas o región del cielo, buscar por nombre o tipo de objeto, buscar por metadatos espaciales (resolución angular y campos de visión), buscar por metadatos temporales. \url{http://www.ivoa.net/Documents/latest/STC-Model.html}.
+	\item[Simulations Data Model] Define y organiza todos los metadatos necesarios para describir conjuntos de datos de simulaciones. Requerimientos: simulaciones. \url{http://www.ivoa.net/documents/SimDM/index.html}.
+\end{description}
+
+\section{Modelo de datos}
+
+En la Tab.~\ref{tab:mdIVOA} se especifica un listado con los atributos y la descripción de cada uno, en concordancia a los recomendados por IVOA.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{c|c|p{3in}}
+		Nombre de la columna & Unidad & Descripción \\\hline\hline
+		\verb;dataproduct_type; & \verb;N/A;           & Tipo de dato lógico \\
+		\verb;calib_level;      & \verb;N/A;           & Nivel de calibración \\
+		\verb;obs_collection;   & \verb;N/A;           & Nombre de la colección de datos \\
+		\verb;obs_id;           & \verb;N/A;           & ID de observación \\
+		\verb;obs_publisher_id; & \verb;N/A;           & Identificador de datos entregado por el editor \\
+		\verb;access_url;       & \verb;N/A;           & URL para acceder a los datos \\
+		\verb;access_format;    & \verb;N/A;           & Formato del archivo \\
+		\verb;access_estsize;   & \verb;kbyte;         & Tamaño estimado \\
+		\verb;target_name;      & \verb;N/A;           & Objeto astronómico observado \\
+		\verb;s_ra;             & \verb;grados;        & RA central \\
+		\verb;s_dec;            & \verb;grados;        & DEC central \\
+		\verb;s_fov;            & \verb;grados;        & Diámetro de la región cubierta \\
+		\verb;s_region;         & \verb;N/A;           & Región cubierta en \gls{adql} \\
+		\verb;s_resolution;     & \verb;arco segundos; & Resolución espacial \\
+		\verb;t_min;            & \verb;dia;           & Hora de comienzo \\
+		\verb;t_max;            & \verb;dia;           & Hora de fin \\
+		\verb;t_exptime;        & \verb;segundo;       & Tiempo de exposición \\
+		\verb;t_resolution;     & \verb;segundo;       & Resolución temporal \\
+		\verb;em_min;           & \verb;minuto;        & Comienzo en coordenadas espectrales \\
+		\verb;em_max;           & \verb;minuto;        & Fin en coordenadas espectrales \\
+		\verb;em_res_power;     & \verb;N/A;           & Poder de resolución espectral \\
+		\verb;o_ucd;            & \verb;N/A;           & UCD observable \\
+		\verb;pol_states;       & \verb;N/A;           & Lista de estados de polarización \\
+		\verb;facility_name;    & \verb;N/A;           & Nombre del lugar usado para la observación \\
+		\verb;instrument_name;  & \verb;N/A;           & Nombre del instrumento usado para la observación \\
+	\end{tabular}
+	\caption{Lista de atributos recomendados por IVOA.}
+	\label{tab:mdIVOA}
+\end{table}
