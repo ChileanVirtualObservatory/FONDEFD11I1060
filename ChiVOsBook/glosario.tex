@@ -1,2 +1,56 @@
-\newglossaryentry{Astronomy Data Query Language}{name={Astronomy Data Query Language}, description={Lenguaje estandar para consultar en bases de datos astronómicas}, text={\emph{Astronomy Data Query Language}}}
+\newglossaryentry{Astronomy Data Query Language}{name={Astronomy Data Query Language}, description={Lenguaje estándar para consultar en bases de datos astronómicas, basado en \gls{sql}. La estandarización fue necesario debido a que las variantes más populares de SQL, ya sea comerciales o de código abierto, difieren ligeramente entre ellas, además que IVOA requería de una manera estándar de especificar una región, que SQL no la tenía}, text={\emph{Astronomy Data Query Language}}}
+\newglossaryentry{Simple Cone Search Protocol}{name={Simple Cone Search Protocol}, description={Protocolo que define una consulta simple para obtener registros desde un catálogo de fuentes astronómicas. La consulta describe una posición en el cielo y una distancia angular, definiendo un cono en el cielo. La respuesta retorna una lista de fuentes astronómicas desde los catálogos cuyas posiciones están dentro del cono, en formato \texttt{VOTable}. \url{http://ivoa.net/Documents/latest/ConeSearch.html}}, text={\emph{Simple Cone Search Protocol}}}
+\newglossaryentry{Simple Image Access Protocol}{name={Simple Image Access Protocol}, description={Esta especificación define un protocolo para la obtención de datos de imágenes desde una variedad de repositorios de imágenes astronómicas, a trav\'es de una interfaz uniforme. La interfaz está destinada a ser razonablemente fácil de implementar por los proveedores de servicios. La consulta define una región rectangular en el cielo, la cual es usada para encontrar imágenes candidatas. El servicio retorna una lista de imágenes en formato \texttt{VOTable}. Por cada imagen candidata se entrega una URL de referencia, la cual permite acceder a la imagen. La imagen puede ser retornada en varios formatos gráficos (\gls{fits}, JPEG, etc). \url{http://ivoa.net/Documents/SIA/}}, text={\emph{Simple Image Access Protocol}}}
+\newglossaryentry{Simple Spectral Access Protocol}{name={Simple Spectral Access Protocol}, description={Este protocolo define una interfaz uniforme para descubrir y acceder remotamente a espectros de una dimensión. Se basa en un modelo de datos más general, capaz de describir los datos espectrofotom\'etricos, incluyendo series de tiempo y las distribuciones espectrales de energía (SED), así como 1-D de espectros. Los conjuntos de datos de candidatos disponibles se describen de manera uniforme en un documento de formato de \texttt{VOTable} que se devuelve en la respuesta a la consulta. \url{http://ivoa.net/documents/SSA/}}, text={\emph{Simple Spectral Access Protocol}}}
+\newglossaryentry{Table Access Protocol}{name={Table Access Protocol}, description={Este protocolo define un servicio general de acceso a datos de tablas, incluyendo catálogos astronómicos, como tambi\'en base de datos generales de tablas. El acceso se provee tanto a la base de datos y a la tabla de metadatos para la tabla actual. La versión actual del protocolo incluye soporte para consultas en múltiples lenguajes, incluyendo consultas especificadas en \gls{adql} y \gls{pql}. Tambi\'en incluye soporte para consultas sincrónicas y asíncronas. Este servicio está ligado netamente al modelo de datos que se usará. \url{http://www.ivoa.net/documents/TAP/}}, text={\emph{Table Access Protocol}}}
+\newglossaryentry{semantics}{name={Semantics}, description={El grupo de semánticas de \gls{ivoa} explora las tecnologías en el área de semánticas, con el objetivo de producir nuevos estándares que ayuden la interoperabilidad de los sistemas del VO. Este grupo está enfocado en el significado o la interpretación de las palabras, frases u otras formas de lenguaje en el contexto de la astronomía. Esto incluye la descripcón estándar de objetos astrofísicos, tipos de datos, conceptos, eventos, o algún otro tipo de fenómeno en astronomía. Este grupo estudia la relación entre palabras, símbolos y conceptos, tanto como el significado de esa representación, como por ejemplo, ontologías. Este grupo cubre el lenguaje natural en astronomía, incluyendo consultas, traducciones, e internacionalización de interfaces. \url{http://ivoa.net/twiki/bin/view/IVOA/IvoaSemantics}}, text={\emph{Semantics}}}
+\newglossaryentry{capability}{name={Capability}, description={Lo que un servicio puede hacer por usted. Por ejemplo, si se ofrece un servicio de \gls{scs}, o un servicio de \gls{tap}, o una interfaz web, etc. Un servicio puede ofrecer más de una \emph{capacidad}}, text={\emph{Capability}}}
+\newglossaryentry{crossmatch}{name={Crossmatch}, description={Corresponde al proceso de encontrar registros en una colección de datos que coincidan con los de otro. Por ejemplo, que el ID de un objeto en un catálogo óptico sea el mismo que para una lista de fuentes de rayos X. Claramente esto requiere que ambos servicios de datos sean interoperables}, text={\emph{Crossmatch}}}
+\newglossaryentry{Data Model}{name={Data Model}, description={Corresponde a una estructura lógica y estandarizada para una conjunto de datos, lo que hace posible que las herramientas le den sentido a los datos devueltos. Esto no es lo mismo que un formato para los datos. Un modelo de datos, por ejemplo, debería obligar a que haya un conjunto de datos que contenga una serie de registros que representen a objetos, y que cada registro debiese contener cantidades para representar \gls{ra}, \gls{dec}, \'epoca (\emph{epoch}) de observación, entre otros. Por otro lado, un formato de datos especifica que el archivo es una tabla, que las entradas están en ASCII, que los enteros son de 16 \texttt{bit}, etc}, text={\emph{Data Model}}}
+\newglossaryentry{Flexible Image Transport System}{name={Flexible Image Transport System}, description={Formato estándar para imágenes astronómicas y tablas. Los FITS tambi\'en especifican una manera estándar para expresar metadatos en duplas valor-palabra clave, y especifica un número pequeño de palabras claves obligatorias, y un número un poco mayor de palabras claves reservadas, las cuales tienen que tener una significado en particular si un archivo los usa}, text={\emph{Flexible Image Transport System}}}
+\newglossaryentry{International Virtual Observatory Alliance}{name={International Virtual Observatory Alliance}, description={Organización que fomenta la colaboración entre \gls{vo} de todo el mundo, acordando los estándares necesarios para hacer que los VO trabajen}, text={\emph{International Virtual Observatory Alliance}}}
+\newglossaryentry{metadata}{name={Metadata}, description={Datos sobre los datos. Normalmente utilizada para describir información estandarizada que va con un archivo de datos (e.g. palabras claves de un FITS), o información de un registro de entrada que describe un recurso como un servicio de datos, o información que describe la estructura de una base de datos: una lista de tablas, los nombres de sus columnas y sus \gls{ucd}}, text={metada}}
+\newglossaryentry{NASA/IPAC Extragalactic Database}{name={NASA/IPAC Extragalactic Database}, description={Es una gran base de datos}, text={NASA/IPAC Extragalactic Database}}
+%\newglossaryentry{VO Portal}{name={}, description={}, text={}}
+%\newglossaryentry{Registry}{name={}, description={}, text={}}
+%\newglossaryentry{Service}{name={}, description={}, text={}}
+%\newglossaryentry{SAMP}{name={}, description={}, text={}}
+%\newglossaryentry{Simbad}{name={}, description={}, text={}}
+%\newglossaryentry{Single Sign on}{name={}, description={}, text={}}
+%\newglossaryentry{Synchronous Services}{name={}, description={}, text={}}
+%\newglossaryentry{Asynchronous Services}{name={}, description={}, text={}}
+%\newglossaryentry{Vizier}{name={}, description={}, text={}}
+%\newglossaryentry{VOEvent}{name={}, description={}, text={}}
+%\newglossaryentry{VOSpace}{name={}, description={}, text={}}
+%\newglossaryentry{VOTable}{name={}, description={}, text={}}
+\newglossaryentry{Unified Content Descriptor}{name={Unified Content Descriptor}, description={Vocabulario estándar para describir cantidades de datos astronómicos. No se especifica el nombre de una cantidad, o su unidad, si no más bien qu\'e tipo de cantidad es. Por ejemplo, una columna en una tabla podría tener el nombre ``T-kin'' y un UCD ``phys.temperature'', que establece que es una temperatura, pero que no implica una unidad en particular}, text={Unified Content Descriptor}}
+%\newglossaryentry{Units}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
+%\newglossaryentry{}{name={}, description={}, text={}}
 
